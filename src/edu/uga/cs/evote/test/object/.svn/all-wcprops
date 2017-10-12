@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/349/evote/src/edu/uga/cs/evote/test/object
+END
+EvoteTester.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/team4/!svn/ver/349/evote/src/edu/uga/cs/evote/test/object/EvoteTester.java
+END
+DeleteTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team4/!svn/ver/330/evote/src/edu/uga/cs/evote/test/object/DeleteTest.java
+END
+UpdateTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team4/!svn/ver/338/evote/src/edu/uga/cs/evote/test/object/UpdateTest.java
+END
+ReadTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/team4/!svn/ver/330/evote/src/edu/uga/cs/evote/test/object/ReadTest.java
+END
+WriteTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/team4/!svn/ver/338/evote/src/edu/uga/cs/evote/test/object/WriteTest.java
+END

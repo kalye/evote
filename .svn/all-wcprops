@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/team4/!svn/ver/865/evote
+END
+compile.sh
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/team4/!svn/ver/503/evote/compile.sh
+END
+run-all-tests.sh
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/team4/!svn/ver/156/evote/run-all-tests.sh
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/team4/!svn/ver/503/evote/README.txt
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/team4/!svn/ver/662/evote/build.xml
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/team4/!svn/ver/58/evote/.project
+END

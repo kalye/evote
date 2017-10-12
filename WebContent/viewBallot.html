@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>eVote System</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="UpdateCandidates.html">Election Candidates</a></li>
+						<li><a href="UpdateElectoralDistricts.html">Electoral
+								Districts</a></li>
+						<li><a href="UpdatePoliticalParties.html">Political
+								Parties</a></li>
+						<li><a href="UpdateBallots.html">Ballots</a></li>
+					</ul></li>
+				<li><a href="editProfile.html">Update Profile</a></li>
+				<li><a href="#">Log Out</a>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<div class="form-group">
+			<label class="col-sm-5">Update Ballot</label> <label
+				class="col-sm-2" for="nameBallot">Name of Ballot</label>
+			<div class="col-sm-5">
+				<input class="form-control" id="nameBallot" type="text"
+					placeholder="Ballot1">
+			</div>
+		</div>
+		<br /> <br />
+		<p>Issue/Election 1:</p>
+		<form>
+			<!-- issue 1-->
+			<div class="form-group">
+				<div class="col-sm-3"></div>
+				<label class="col-sm-3" for="nameOfIssue">Name of
+					Issue/Position</label>
+				<div class="textarea col-sm-6">
+					<textarea class="form-control" rows="2" id="nameOfIssue"
+						style="margin-bottom: 10px" placeholder="Issue1"></textarea>
+				</div>
+				<br>
+			</div>
+			<br />
+			<!-- options  -->
+			<div class="form-group">
+				<div class="col-sm-4"></div>
+				<label class="col-sm-2" for="nameOfIssue">Options</label>
+				<div class="textarea col-sm-6">
+					<textarea class="form-control" rows="2" id="nameOfIssue"
+						placeholder="Option1"></textarea>
+				</div>
+			</div>
+			<p>Issue/Election 2:</p>
+			<!-- issue 2-->
+			<div class="form-group">
+				<div class="col-sm-3"></div>
+				<label class="col-sm-3" for="nameOfIssue2">Name of
+					Issue/Position</label>
+				<div class="textarea col-sm-6">
+					<textarea class="form-control" rows="2" id="nameOfIssue2"
+						style="margin-bottom: 10px" placeholder="Position1"></textarea>
+				</div>
+				<br>
+			</div>
+			<br />
+			<!-- options  -->
+			<div class="form-group">
+				<div class="col-sm-4"></div>
+				<label class="col-sm-2" for="nameOfIssue">Options</label>
+				<div class="textarea col-sm-6">
+					<textarea class="form-control" rows="2" id="nameOfIssue"
+						placeholder="Option1"></textarea>
+				</div>
+			</div>
+			<br /> <br /> <br /> <br /> <br />
+			<p>Continue to next page to edit more issues and positions.
+				Otherwise press "Save Changes" or "Cancel".</p>
+
+
+			<br /> <br /> <a type="button" class="btn btn-default"
+				href="GoBack.html">Cancel</a> <a type="button"
+				class="btn btn-default" href="#">Save</a> <a type="button"
+				class="btn btn-default" href="GoBack.html">Save and Exit</a> <a
+				type="button" class="btn btn-default" href="BallotCreation.html">Next
+				Page</a>
+	</div>
+</body>
+</html>

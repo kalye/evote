@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>eVote System</title> 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--  <style>
+table {
+	border-collapse: collapse;
+	width: 50%;
+}
+
+th {
+	height: 50px;
+}
+
+.dropdown-submenu {
+	position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -1px;
+}
+
+td {
+	padding-top: 10px;
+	padding-bottom: 50px;
+}
+</style>-->
+</head>
+<body><nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="UpdateCandidates.html">Election Candidates</a></li>
+						<li><a href="UpdateElectoralDistricts.html">Electoral
+								Districts</a></li>
+						<li><a href="UpdatePoliticalParties.html">Political
+								Parties</a></li>
+						<li><a href="UpdateBallots.html">Ballots</a></li>
+					</ul></li>
+				<li><a href="editProfile.html">Update Profile</a></li>
+				<li><a href="#">Log Out</a>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="container-fluid">
+		<h3>Candidates</h3>
+		<!-- first row -->
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">Candidate 1</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Update</button>
+			</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Delete</button>
+			</div>
+		</div>
+		<!-- second row -->
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">Candidate 2</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Update</button>
+			</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Delete</button>
+			</div>
+		</div>
+		<!-- first row -->
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">Candidate 3</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Update</button>
+			</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Delete</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="container-fluid">
+		<!-- add new candidate row -->
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<button type="button" class="btn btn-default">Add New
+					Candidate</button>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="container-fluid">
+		<!-- submit save and save and exit row -->
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-default">Submit</button>
+			</div>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-default">Save</button>
+			</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-default">Save and Exit</button>
+			</div>
+		</div>
+	</div>
+	
+	<!--  <nav class="navbar  navbar-fixed-bottom"
+		style="background-color: #732d2d;">
+		<h4 class="text-center">eVote System</h4>
+		<h4 class="text-center">Copyright team 4 CSCI4050</h4>
+	</nav>-->
+	
+	<!--  <script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>-->
+</body>
+</html>

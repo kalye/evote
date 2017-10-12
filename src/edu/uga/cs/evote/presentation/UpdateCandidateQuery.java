@@ -1,0 +1,209 @@
+package edu.uga.cs.evote.presentation;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.uga.cs.evote.db.DbUtils;
+import edu.uga.cs.evote.entity.Candidate;
+import edu.uga.cs.evote.logic.LogicLayer;
+import edu.uga.cs.evote.logic.impl.LogicLayerImpl;
+import edu.uga.cs.evote.object.ObjectLayer;
+import edu.uga.cs.evote.object.impl.ObjectLayerImpl;
+import edu.uga.cs.evote.persistence.PersistenceLayer;
+import edu.uga.cs.evote.persistence.impl.PersistenceLayerImpl;
+
+public class UpdateCandidateQuery extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public void doPost( HttpServletRequest  request, HttpServletResponse response ) throws ServletException, IOException{
+		
+		Connection  conn = null;
+		PrintWriter toClient = response.getWriter();
+		try{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    
+			response.setContentType("text/html");
+
+		    //String realPath = getServletContext().getRealPath("/register.html");
+	        
+	        // get a database connection
+	        try {
+	            conn = DbUtils.connect();
+	        } 
+	        catch (Exception seq) {
+	            System.err.println( "Unable to obtain a database connection" );
+	        }
+	        
+	        if( conn == null ) {
+	            System.out.println( "failed to connect to the database" );
+	            return;
+	        }
+	        
+	        LogicLayer logicLayer = new LogicLayerImpl(conn);
+	        ObjectLayer objectLayer = new ObjectLayerImpl();
+	        PersistenceLayer persistence = new PersistenceLayerImpl( conn, objectLayer ); 
+	        objectLayer = new ObjectLayerImpl(persistence);
+	        persistence.setObjectLayer(objectLayer);
+	        
+		    response.setContentType("text/html");
+
+		    String result = "<!DOCTYPE html>" +
+    				"<html lang='en'>" +
+    					"<head>" +
+    						"<title>Edit Profile</title>" +
+    						"<meta charset='utf-8'>" +
+    						"<meta name='viewport' content='width=device-width, initial-scale=1'>" +
+    						"<link rel='stylesheet'" +
+    							" href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>" +
+    						"<script" +
+    							" src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>" +
+    						"<script" +
+    							" src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>" +
+    					"</head>" +
+    					"<body>" +
+    						"<nav class='navbar navbar-default'>" +
+    							"<div class='container-fluid'>" +
+    								"<div class='navbar-header'>" +
+    									"<a class='navbar-brand' href='ElectionsOfficerHome.html'>eVote - Elections Officer</a>" +
+    								"</div>" +
+    								"<ul class='nav navbar-nav'>" +
+    									"<li class='dropdown'><a class='dropdown-toggle'" +
+    										" data-toggle='dropdown' href='#'>View/Update <span class='caret'></span></a>" +
+    										"<ul class='dropdown-menu'>" +
+    										"<li><a href='ListBallotsQuery'>Ballots</a></li>" +
+											"<li><a href='searchDistricts.html'>Electoral Districts</a></li>" +
+											"<li><a href='searchIssues.html'>Issues</a></li>" +
+											"<li><a href='searchElections.html'>Elections</a></li>" +
+											"<li><a href='searchCandidatess.html'>Candidates</a></li>" +
+											"<li><a href='searchParties.html'>Political Parties</a></li>" +
+    										"</ul></li>" +
+    								"<li><a href='ViewProfileQuery'>Update Profile</a></li>" +
+    								"<li><a href='successAnon.html'>Log Out</a>" +
+    					"</ul></div></nav>";
+		    
+		    List<Candidate> candidates = logicLayer.findAllCandidates();
+		    
+		    String update;
+		    String delete;
+		    
+		    for(Candidate candidate: candidates){
+		    	
+		    	update = request.getParameter("update" + candidate.getId());
+		    	delete = request.getParameter("delete" + candidate.getId());
+		    	
+		    	if(update != null){
+
+		    		if(candidate.getElection().getBallot().getOpenDate().before(new Date()) || 
+		    			candidate.getElection().getBallot().getOpenDate().equals(new Date())){
+		    			
+		    			String redirect = new String("noEdit.html");
+					    response.sendRedirect(redirect);
+					    conn.close();
+					    toClient.close();
+					    return;
+		    		}
+		    		
+		    		for (Cookie c : request.getCookies()) {
+		    		    
+		    			c.setValue("");
+		    		    c.setMaxAge(0);
+		    		    c.setPath("/");
+
+		    		    response.addCookie(c);
+		    		}
+				    
+				    Cookie cookie = new Cookie("candidate", "" + candidate.getId());
+				    cookie.setMaxAge(60*60);
+				    response.addCookie(cookie);
+				    System.out.println("TEAM4: page is " + request.getParameter("page"));
+
+				    result += "<div class='container'>" +
+				    				"<h3>Update Candidate</h3>" +
+				    				"<form method=post action='EditCandidateQuery'>" +
+				    					"<div class='form-group'>" +
+				    						"<label for='name'>Name:</label> <input type='text'" +
+				    						"class='form-control' id='name' name='name' placeholder='" + candidate.getName() + "'>" +
+				    					"</div>" +
+				    					"<div class='form-group'>" +
+				    						"<label for='party'>Political Party:</label> <input type='text'" +
+				    						"class='form-control' id='party' name='party' placeholder='" + candidate.getPoliticalParty().getName() + "'>" +
+				    					"</div>" + 
+				    					"<p>Running for Office: " + candidate.getElection().getOffice() + " in " + 
+					    					candidate.getElection().getBallot().getElectoralDistrict().getName() + 
+					    					" ( " + candidate.getElection().getBallot().getElectoralDistrict().getZipCode() + " )</p>" + 
+					    				"<input type='hidden' name='page' value='"+ request.getParameter("page") + "'>";
+				    if(request.getParameter("search") != null) result += "<input type='hidden' name='search' value='"+ request.getParameter("search") + "'>";
+
+				    
+				    result +=	"<button type='submit' class='btn btn-default' name='save'>Save Changes</button>" +
+				    					"<a type='button' class='btn btn-default' href='ListCandidatesQuery'>Cancel</a>" +
+				    					"<button type='delete' class='btn btn-default' name='delete'>Delete Candidate</button>" +
+				    				"</form>" +
+				    			"</div>" +
+				    		"</body>" +
+				    	"</html>";
+				   toClient.println(result);
+				   conn.close();
+				   toClient.close();			
+		    	} else if(delete != null){
+				    
+		    		if(candidate.getElection().getBallot().getOpenDate().before(new Date()) || 
+			    			candidate.getElection().getBallot().getOpenDate().equals(new Date())){
+			    			
+			    			String redirect = new String("noEdit.html");
+						    response.sendRedirect(redirect);
+						    conn.close();
+						    toClient.close();
+						    return;
+			    	}
+		    		
+		    		for (Cookie c : request.getCookies()) {
+		    		    
+						if(!(c.getName().equals("voterUser") || c.getName().equals("electionOfficerUser"))){
+							c.setValue("");
+							c.setMaxAge(0);
+							c.setPath("/");
+						}//if
+		    		    response.addCookie(c);
+		    		}
+		    		
+		    		Cookie sendCookie = new Cookie("candidateDelete", "" + candidate.getId());
+		    		sendCookie.setMaxAge(60*60);
+				    response.addCookie(sendCookie);
+				    String redirect = new String("AreYouSureQuery");
+				    if(request.getParameter("page") != null) {
+				    	redirect += "?page=" + request.getParameter("page");
+				    	redirect += "&search=" + request.getParameter("search");
+				    }
+				    response.sendRedirect(redirect);
+				    conn.close();
+				    toClient.close();
+				    return;
+		    	}
+		    }		    
+		} catch(Exception e){
+
+			try{
+				conn.close();
+			} catch(Exception f){
+				
+			}
+		    toClient.println("<p>" + e + "</p>");
+		    toClient.close();
+		}//try
+		
+	}//doPost
+}

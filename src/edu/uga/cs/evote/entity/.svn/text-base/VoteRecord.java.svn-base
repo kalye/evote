@@ -1,0 +1,68 @@
+package evote.src.edu.uga.cs.evote.entity;
+
+import java.util.Date;
+
+import evote.src.edu.uga.cs.evote.EVException;
+import evote.src.edu.uga.cs.evote.persistence.Persistable;
+
+public interface VoteRecord extends Persistable
+{
+    /** Return the date the vote has been cast.
+     * @return the date of the cast vote
+     */
+    public Date getDate();
+    
+    /** Set the date the vote has been cast.
+     * @param date the new date of the cast vote
+     */
+    public void setDate( Date date );
+    
+    /** Return the Voter who cast the vote.
+     * @return the voter who cast the vote
+     * @throws EVException in case there is a problem with the retrieval of the requested object
+     */
+    public Voter getVoter() throws EVException;
+    
+    /** Set the Voter who cast the vote.
+     * @param voter the new voter who cast the vote
+     * @throws EVException in case there is a problem with setting a link to the argument object
+     */
+    public void setVoter( Voter voter ) throws EVException;
+    
+    /** Return the Ballot on which the vote has been cast.
+     * @return the ballot on which the vote has been cast
+     * @throws EVException in case there is a problem with the retrieval of the requested object
+     */
+    public Ballot getBallot() throws EVException;
+    
+    /** Set the new Ballot on which the vote has been cast.
+     * @param ballot the new ballot on which the vote has been cast
+     * @throws EVException in case there is a problem with setting a link to the argument object
+     */
+    public void setBallot( Ballot ballot ) throws EVException; 
+    
+    /** Return the ballotid on which the vote has been cast.
+     * @return the id of ballot on which the vote has been cast
+     * @throws EVException in case there is a problem with the retrieval of the requested object
+     */
+    public long getBallotid() throws EVException; 
+    
+    /** Set the ballotid on which a vote is casted.
+     * @param ballotid where new vote was casted on
+     * @throws EVException in case there is a problem with setting a link to the argument object
+     */
+    public void setBallotid(long ballotid) throws EVException; 
+    
+    /** Return the Voter id who cast the vote.
+     * @return the voter id who cast the vote
+     * @throws EVException in case there is a problem with the retrieval of the requested object
+     */
+    public long getVoterid() throws EVException; 
+    
+    /** Set the ballotid on which the vote has been cast.
+     * @param ballotid the new ballot on which the vote has been cast
+     * @throws EVException in case there is a problem with setting a link to the argument object
+     */
+    public void setVoterid(long voterid) throws EVException; 
+
+}

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/650/evote/src/edu/uga/cs/evote/entity
+END
+ElectionsOfficer.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/ElectionsOfficer.java
+END
+ElectoralDistrict.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/team4/!svn/ver/329/evote/src/edu/uga/cs/evote/entity/ElectoralDistrict.java
+END
+VoteRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/team4/!svn/ver/105/evote/src/edu/uga/cs/evote/entity/VoteRecord.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/334/evote/src/edu/uga/cs/evote/entity/User.java
+END
+PoliticalParty.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/PoliticalParty.java
+END
+Election.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/Election.java
+END
+Issue.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/Issue.java
+END
+Voter.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/Voter.java
+END
+BallotItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/team4/!svn/ver/152/evote/src/edu/uga/cs/evote/entity/BallotItem.java
+END
+Ballot.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/team4/!svn/ver/650/evote/src/edu/uga/cs/evote/entity/Ballot.java
+END
+Candidate.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/team4/!svn/ver/60/evote/src/edu/uga/cs/evote/entity/Candidate.java
+END

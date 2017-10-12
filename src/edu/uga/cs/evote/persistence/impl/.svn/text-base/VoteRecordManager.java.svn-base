@@ -1,0 +1,237 @@
+package evote.src.edu.uga.cs.evote.persistence.impl;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import evote.src.edu.uga.cs.evote.EVException;
+import evote.src.edu.uga.cs.evote.entity.Ballot;
+import evote.src.edu.uga.cs.evote.entity.VoteRecord;
+import evote.src.edu.uga.cs.evote.entity.Voter;
+import evote.src.edu.uga.cs.evote.object.ObjectLayer;
+
+
+
+public class VoteRecordManager {
+	private static final String INSERT_VOTER_RECORD = "insert into voteRecord ( voterid, ballotid, date ) values ( ?, ?, ?)";
+	private static final String UPDATE_VOTER_RECORD = "update voteRecord set voterid = ?, ballotid = ?, date = ? where id = ?";
+	private static final String DELETE_VOTER_RECORD = "delete from voteRecord where id = ?";              
+
+	private ObjectLayer objectLayer = null;
+	private Connection   conn = null;
+
+	public VoteRecordManager(Connection conn, ObjectLayer objectLayer) {
+		this.conn = conn;
+		this.objectLayer = objectLayer;
+	}
+	public void store(VoteRecord voteRecord) throws EVException {
+		PreparedStatement    stmt = null;
+		int                  inscnt;
+		long                 voteRecordId;
+		try {
+			if( !voteRecord.isPersistent() )
+				stmt = (PreparedStatement) conn.prepareStatement( INSERT_VOTER_RECORD );
+			else
+				stmt = (PreparedStatement) conn.prepareStatement( UPDATE_VOTER_RECORD );
+			if( voteRecord.getVoter() != null ) 
+				stmt.setLong( 1, voteRecord.getVoter().getId() );
+			else 
+				throw new EVException( "VoteRecordManager.save: can't save a VoteRecord: voterid undefined" );
+
+			if( voteRecord.getBallot() != null )
+				stmt.setLong( 2, voteRecord.getBallot().getId() );
+			else
+				throw new EVException( "VoteRecordManager.save: can't save a VoteRecord: ballotid undefined" );
+			if( voteRecord.getDate() != null )
+				stmt.setDate( 3, new java.sql.Date( voteRecord.getDate().getTime()) );
+			else
+				stmt.setNull(3, java.sql.Types.DATE);
+			if( voteRecord.isPersistent() )
+				stmt.setLong( 4, voteRecord.getId() );
+
+			inscnt = stmt.executeUpdate();
+
+			if( !voteRecord.isPersistent() ) {
+				if( inscnt >= 1 ) {
+					String sql = "select last_insert_id()";
+					if( stmt.execute( sql ) ) { // statement returned a result
+
+						// retrieve the result
+						ResultSet r = stmt.getResultSet();
+
+						// we will use only the first row!
+						//
+						while( r.next() ) {
+
+							// retrieve the last insert auto_increment value
+							voteRecordId = r.getLong( 1 );
+							if( voteRecordId > 0 )
+								voteRecord.setId( voteRecordId ); // set this person's db id (proxy object)
+						}
+					}
+				}
+				else
+					throw new EVException( "VoteRecordManager.save: failed to save a VoteRecord" );
+			}
+			else {
+				if( inscnt < 1 )
+					throw new EVException( "VoteRecordManager.save: failed to save a VoteRecord" ); 
+			}
+
+		} catch( SQLException e ) {
+			e.printStackTrace();
+			throw new EVException( "VoteRecordManager.save: failed to save a VoteRecord: " + e );
+		}
+	}
+
+	public void delete(VoteRecord voteRecord) 
+			throws EVException
+	{
+		PreparedStatement    stmt = null;
+		int                  inscnt;
+
+		// form the query based on the given Ballot Item object instance
+		if( !voteRecord.isPersistent() ) // is the Ballot Item object persistent?  If not, nothing to actually delete
+			throw new EVException( "VoteRecordManager.delete: failed to delete this voteRecord Item");
+
+		try {
+
+			stmt = (PreparedStatement) conn.prepareStatement( DELETE_VOTER_RECORD );
+
+			stmt.setLong( 1, voteRecord.getId() );
+
+			inscnt = stmt.executeUpdate();
+
+			if( inscnt == 0 ) {
+				throw new EVException( "VoteRecordManager.delete: failed to delete this voteRecord Item" );
+			}
+		}
+		catch( SQLException e ) {
+			throw new EVException( "VoteRecordManager.delete: failed to delete this voteRecord Item: " + e.getMessage() );
+		}
+	}
+	
+	public List<VoteRecord> restore(VoteRecord modelVoteRecord) throws EVException {
+
+		String selectVoteRecordSql = "select r.id, r.date, " +
+									" v.id, v.userName, v.password, v.email, v.firstName, v.lastName, v.address, v.zipCode, v.voterid, v.age," +
+									" b.id, b.openDate, b.closeDate" +
+									" from voteRecord r, userPerson v, ballot b where v.id = r.voterid and b.id = r.ballotid";
+		Statement stmt = null;
+		StringBuffer query = new StringBuffer(100);
+		StringBuffer condition = new StringBuffer(100);
+		List<VoteRecord> voteRecords = new ArrayList<VoteRecord>();
+
+		condition.setLength(0);
+
+		//form query based on VoteRecord Object
+		query.append(selectVoteRecordSql);
+
+		if(modelVoteRecord != null) {
+			if(modelVoteRecord.getId() >= 0)
+				query.append(" and r.id = " + modelVoteRecord.getId());
+			else {
+				if( modelVoteRecord.getDate() != null )
+					condition.append( " and r.date = " + modelVoteRecord.getDate() );
+
+				if( modelVoteRecord.getVoter() != null ) {
+					condition.append( " and r.voterid = " + modelVoteRecord.getVoter().getId() );
+				}
+
+				if( modelVoteRecord.getBallot() != null ) {
+					condition.append( " and r.ballotid = " + modelVoteRecord.getBallot().getId() );
+				}
+
+				if( condition.length() > 0 ) {
+					query.append( condition );
+				}
+			}
+		}
+
+		try {
+
+			stmt = conn.createStatement();
+
+			// retrieve the persistent Person objects
+			//
+			if( stmt.execute( query.toString() ) ) { // statement returned a result
+				ResultSet rs = stmt.getResultSet();
+				long   id;
+				Date date;
+				
+				long voterId;
+				String userName;
+				String password;
+				String email;
+				String firstName;
+				String lastName;
+				String address;
+				String zipCode;
+				String voterID;
+				int age;
+				
+				long ballotId;
+				Date openDate;
+				Date closeDate;
+				
+				while( rs.next() ) {
+
+					id = rs.getLong( 1 );
+					date = rs.getDate( 2 );
+					
+					voterId = rs.getLong( 3 );
+					userName = rs.getString( 4 );
+					password = rs.getString( 5 );
+					email = rs.getString( 6 );
+					firstName = rs.getString( 7 );
+					lastName = rs.getString( 8 );
+					address = rs.getString( 9 );
+					zipCode = rs.getString( 10 );
+					voterID = rs.getString( 11 );
+					age = rs.getInt( 12 );
+					
+					ballotId = rs.getLong( 13 );
+					openDate = rs.getDate( 14 );
+					closeDate = rs.getDate( 15 );
+					
+					Voter voterPerson = objectLayer.createVoter();
+					voterPerson.setId(voterId);
+					voterPerson.setUserName(userName);
+					voterPerson.setPassword(password);
+					voterPerson.setEmailAddress(email);
+					voterPerson.setFirstName(firstName);
+					voterPerson.setLastName(lastName);
+					voterPerson.setAddress(address);
+					voterPerson.setZipCode(zipCode);
+					voterPerson.setVoterId(voterID);
+					voterPerson.setAge(age);
+					
+					Ballot ballot = objectLayer.createBallot();
+					ballot.setId(ballotId);
+					ballot.setOpenDate(openDate);
+					ballot.setCloseDate(closeDate);
+					
+					VoteRecord voteRecord = objectLayer.createVoteRecord( null, null, date );
+					voteRecord.setId( id );
+					voteRecord.setBallot(ballot);
+					voteRecord.setVoter(voterPerson);
+					voteRecords.add( voteRecord );
+
+				}
+
+				return voteRecords;
+			}
+		}
+		catch( Exception e ) {      // just in case...
+			throw new EVException( "VoteRecordManager.restore: Could not restore persistent VoteRecord object; Root cause: " + e );
+		}
+
+		// if we get to this point, it's an error
+		throw new EVException( "VoteRecordManager.restore: Could not restore persistent VoteRecord objects" );
+	}
+}

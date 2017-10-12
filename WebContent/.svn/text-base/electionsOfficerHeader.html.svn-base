@@ -1,0 +1,23 @@
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="ElectionsOfficerHome.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="ListDistrictsQuery">Electoral
+								Districts</a></li>
+						<li><a href="ListPartiesQuery">Political
+								Parties</a></li>
+						<li><a href="ListBallotsQuery">Ballots</a></li>
+					</ul></li>
+				<li><a href="ViewProfileQuery">View Profile</a></li>
+				<li><a href="successAnon.html">Log Out</a>
+			</ul>
+		</div>
+	</nav>

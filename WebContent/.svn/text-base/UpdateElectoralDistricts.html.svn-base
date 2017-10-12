@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>eVote System</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  <style>
+.dropdown-submenu {
+	position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -1px;
+}
+</style>
+-->
+
+</head>
+<body>
+<!-- 
+	<nav class="navbar " style="background-color: #732d2d;">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li>
+					<div class="dropdown">
+						<a class="btn btn-default dropdown-toggle" type="button"
+							data-toggle="dropdown"> <span
+							class="glyphicon glyphicon-align-justify"></span>Create New
+							Ballot
+						</a>
+						<ul class="dropdown-menu">
+							<li><a tabindex="-1" href="#">Create New Ballot</a></li>
+							<li class="dropdown-submenu"><a class="test" tabindex="-1"
+								href="#">Existing Ballot<span
+									class="glyphicon glyphicon-triangle-right"></span></a>
+								<ul class="dropdown-menu">
+									<li><a tabindex="-1" href="#">Update Ballots</a></li>
+									<li><a tabindex="-1" href="#">View Ballots</a></li>
+								</ul></li>
+							<li><a href="#">View/Update Election Candidates</a></li>
+							<li><a href="#">View/Update Electoral Districts</a></li>
+							<li><a href="#">View/Update Political Parties</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href=“#”><span class="glyphicon glyphicon-cog"></span></a>
+				</li>
+				<li><a href="#"><span class="glyphicon glyphicon-search"></span></a>
+				</li>
+				<li><a href="#">Log Out</a></li>
+
+			</ul>
+		</div>
+	</nav>
+-->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="UpdateCandidates.html">Election Candidates</a></li>
+						<li><a href="UpdateElectoralDistricts.html">Electoral
+								Districts</a></li>
+						<li><a href="UpdatePoliticalParties.html">Political
+								Parties</a></li>
+						<li><a href="UpdateBallots.html">Ballots</a></li>
+					</ul></li>
+				<li><a href="editProfile.html">Update Profile</a></li>
+				<li><a href="#">Log Out</a>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<h3>Welcome Elections Officer!</h3>
+		<p>Please nagivate through the website using the navigation bar.</p>
+	</div>
+	<!--<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>-->
+</body>
+</html>

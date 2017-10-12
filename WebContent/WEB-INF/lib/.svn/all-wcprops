@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/team4/!svn/ver/656/evote/WebContent/WEB-INF/lib
+END
+freemarker.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/322/evote/WebContent/WEB-INF/lib/freemarker.jar
+END
+mail-1.4.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/656/evote/WebContent/WEB-INF/lib/mail-1.4.7.jar
+END
+mysql-connector-java-5.1.33-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/322/evote/WebContent/WEB-INF/lib/mysql-connector-java-5.1.33-bin.jar
+END
+commons-lang-2.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/team4/!svn/ver/656/evote/WebContent/WEB-INF/lib/commons-lang-2.6.jar
+END

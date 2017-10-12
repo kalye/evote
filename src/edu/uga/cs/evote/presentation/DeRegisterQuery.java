@@ -1,0 +1,113 @@
+package edu.uga.cs.evote.presentation;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.uga.cs.evote.db.DbUtils;
+import edu.uga.cs.evote.entity.Voter;
+import edu.uga.cs.evote.logic.LogicLayer;
+import edu.uga.cs.evote.logic.impl.LogicLayerImpl;
+import edu.uga.cs.evote.object.ObjectLayer;
+import edu.uga.cs.evote.object.impl.ObjectLayerImpl;
+import edu.uga.cs.evote.persistence.PersistenceLayer;
+import edu.uga.cs.evote.persistence.impl.PersistenceLayerImpl;
+
+
+//will have another html file with html forms that have boxes to allow the user to select new information
+public class DeRegisterQuery extends HttpServlet  {
+
+    private static final long serialVersionUID = 1L;
+
+    public void doPost( HttpServletRequest  request, HttpServletResponse response ) throws ServletException, IOException{
+
+        Connection  conn = null;
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+            response.setContentType("text/html");
+            // get a database connection                                                                                                  \
+                                                                                                                                           
+            try {
+                conn = DbUtils.connect();
+            }
+            catch (Exception seq) {
+                System.err.println( "Unable to obtain a database connection" );
+            }
+
+            if( conn == null ) {
+		System.out.println( "failed to connect to the database" );
+                return;
+            }
+
+            ObjectLayer objectLayer = new ObjectLayerImpl();
+	        PersistenceLayer persistence = new PersistenceLayerImpl( conn, objectLayer ); 
+	        objectLayer = new ObjectLayerImpl(persistence);
+	        persistence.setObjectLayer(objectLayer);
+			
+            LogicLayer logicLayer = new LogicLayerImpl(conn);
+
+            response.setContentType("text/html");
+
+            String cookieValue = "";
+    	    Cookie[] cookies = request.getCookies();   
+
+    	    List<Voter> voters = logicLayer.findAllVoters();
+    	    //	    String ssid = request.getSession().getId();
+    	    //Session session = SessionManager.getSessionById(ssid);
+    	    //User user = session.getUser();
+
+    		    for(Cookie cookie: cookies){
+
+                        if(cookie.getName().equals("voterUser")){
+                            	
+                            	cookieValue = cookie.getValue();
+                                for(int i = 0; i < voters.size(); i++){
+                                	
+                                    Voter voter = voters.get(i);  //if this doesn't work, compare each voter value in the list to the user values                       
+                                    if(voter.getUserName().equals(cookieValue)){
+                                    	
+                                    	objectLayer.deleteVoter(voter);
+                                    }
+                                }
+                        }
+    		    }
+    		   
+    		    for (Cookie c : request.getCookies()) {
+
+    				c.setValue("");
+    				c.setMaxAge(0);
+    				c.setPath("/");
+
+        		    response.addCookie(c);
+        		}
+    		    
+            conn.close();
+            response.sendRedirect("successAnon.html");
+
+            try{
+                conn.close();
+            } catch(Exception f){
+
+            }
+       
+        }catch(Exception e){
+        	try {
+        		
+				conn.close();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+        }
+
+    }//doGet
+}

@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/team4/!svn/ver/349/evote/src/edu/uga/cs/evote/test
+END
+run-all-tests.sh
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/team4/!svn/ver/150/evote/src/edu/uga/cs/evote/test/run-all-tests.sh
+END

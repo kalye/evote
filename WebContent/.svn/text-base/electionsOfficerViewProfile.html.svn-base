@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>View Profile</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="ElectionsOfficerHome.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="ListCandidatesQuery">Election Candidates</a></li>
+						<li><a href="ListDistrictsQuery">Electoral
+								Districts</a></li>
+						<li><a href="ListPartiesQuery">Political
+								Parties</a></li>
+						<li><a href="ListBallotsQuery">Ballots</a></li>
+					</ul></li>
+				<li><a href="ViewProfileQuery">View Profile</a></li>
+				<li><a href="successAnon.html">Log Out</a>
+			</ul>
+		</div>
+	</nav>
+	
+	<h1>View Profile</h1>
+	<p>
+		First Name: Harry (<a href="editProfile.html">edit</a>)
+	</p>
+	<p>
+		Last Name: Potter (<a href="editProfile.html">edit</a>)
+	</p>
+	<p>
+		Email Address: theboywholived@hogwarts.edu (<a href="editProfile.html">edit</a>)
+	</p>
+	<p>
+		Address: The Cupboard Under the Stairs (<a href="editProfile.html">edit</a>)
+	</p>
+	<p>
+		Zip Code: 00000 (<a href="editProfile.html">edit</a>)
+	</p>
+	<p>
+		<a href="editProfile.html">Change Password</a>
+	</p>
+	<button type="quit" class="btn btn-default"
+		onclick="javascript:window.location.href='GoBack.html'; return false;">De-Register</button>
+</body>
+</html>

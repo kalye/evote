@@ -1,0 +1,203 @@
+package evote.src.edu.uga.cs.evote.persistence.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import evote.src.edu.uga.cs.evote.EVException;
+import evote.src.edu.uga.cs.evote.entity.Issue;
+import evote.src.edu.uga.cs.evote.object.ObjectLayer;
+
+public class IssueManager {
+
+	private ObjectLayer objectLayer = null;
+    private Connection  conn = null;
+	
+	public IssueManager(Connection conn, ObjectLayer objectLayer) {
+		// TODO Auto-generated constructor stub
+		this.conn = conn;
+		this.objectLayer = objectLayer;
+	}
+
+	public void store(Issue issue) throws EVException{
+		// TODO Auto-generated method stub
+		
+		String               insertIssueSql = "insert into ballotItem ( kind, voteCount, ballotid, question, yesCount, isPartisan) values ( ?, ?, ?, ?, ?, false)";              
+        String               updateIssueSql = "update ballotItem set kind = ?, voteCount = ?, ballotid = ?, question = ?, yesCount = ? where id = ?";              
+        PreparedStatement    stmt;
+        int                  inscnt;
+        long                 issueId;
+		
+        try {
+        	//create Elections Issue in database
+        	if(!issue.isPersistent()) {
+        		stmt = (PreparedStatement) conn.prepareStatement(insertIssueSql);
+        	} else {
+        		stmt = (PreparedStatement) conn.prepareStatement(updateIssueSql);
+        	}
+        	
+        	//set kind
+        	stmt.setString(1, "issue");
+        	
+        	//edit voteCount in database
+        		stmt.setInt(2, issue.getVoteCount());
+        	//edit ballotid in database
+        	if (issue.getBallot() != null)
+        		stmt.setLong(3, issue.getBallot().getId());
+        	else
+        		throw new EVException("IssueManager.save: can't save an Elections Issue: password undefined");
+        	
+        	//edit question
+        	if(issue.getQuestion() != null) {
+        		stmt.setString(4, issue.getQuestion());
+        	}
+        	else
+        		stmt.setString(4, "");
+        	
+        	//edit yesCount
+        	stmt.setInt(5, issue.getYesCount());
+   
+        	if(issue.isPersistent())
+        		stmt.setLong(6, issue.getId());
+        	
+        	inscnt = stmt.executeUpdate();
+        	
+        	if( !issue.isPersistent() ) {
+                // in case this this object is stored for the first time,
+                // we need to establish its persistent identifier (primary key)
+                if( inscnt == 1 ) {
+                    String sql = "select last_insert_id()";
+                    if( stmt.execute( sql ) ) { // statement returned a result
+                        // retrieve the result
+                        ResultSet r = stmt.getResultSet();
+                        // we will use only the first row!
+                        while( r.next() ) {
+                            // retrieve the last insert auto_increment value
+                            issueId = r.getLong( 1 );
+                            if( issueId > 0 )
+                                issue.setId( issueId ); // set this person's db id (proxy object)
+                        }
+                    }
+                }
+            }
+            else {
+                if( inscnt < 1 )
+                    throw new EVException( "IssueManager.save: failed to save an Elections Issue" ); 
+            }
+        	
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        	throw new EVException("IssueManager.save: failed to save an Elections Issue: " + e);
+        }
+
+	} //store
+	
+	public void delete( Issue issue ) 
+            throws EVException
+    {
+        String               deleteIssueSql = "delete from ballotItem where id = ?";              
+        PreparedStatement    stmt = null;
+        int                  inscnt;
+        
+        // form the query based on the given Person object instance
+        if( !issue.isPersistent() ) // is the Person object persistent?  If not, nothing to actually delete
+            throw new EVException( "IssueManager.delete: failed to delete this Election Issue");
+        
+        try {
+            System.out.println("Issue id to be deleted: " + issue.getId());
+            //DELETE t1, t2 FROM t1, t2 WHERE t1.id = t2.id;
+            //DELETE FROM t1, t2 USING t1, t2 WHERE t1.id = t2.id;
+            stmt = (PreparedStatement) conn.prepareStatement( deleteIssueSql );
+            
+            stmt.setLong( 1, issue.getId() );
+            
+            inscnt = stmt.executeUpdate();
+            
+            if( inscnt == 0 ) {
+                throw new EVException( "IssueManager.delete: failed to delete this Election Issue" );
+            }
+        }
+        catch( SQLException e ) {
+            throw new EVException( "IssueManager.delete: failed to delete this Election Issue: " + e.getMessage() );
+        }
+    }
+	
+	public List<Issue> restore(Issue modelIssue) throws EVException {
+		
+		String selectIssueSql = "select id, voteCount, question, yesCount from ballotItem where kind = 'issue' ";
+		Statement stmt = null;
+		StringBuffer query = new StringBuffer(100);
+		List<Issue> issues = new ArrayList<Issue>();
+		
+		
+		//form query based on Issue Object
+		query.append(selectIssueSql);
+		
+		if(modelIssue != null) {
+			if(modelIssue.getId() >= 0)
+				query.append("and id = " + modelIssue.getId());
+            else {
+                if( modelIssue.getVoteCount() != 0 )
+                	query.append( " and voteCount = " + modelIssue.getVoteCount() );
+
+                if( modelIssue.getQuestion() != null ) {
+                	query.append( " and question = '" + modelIssue.getQuestion() + "'");
+                }
+
+                if( modelIssue.getYesCount() != 0 ) {
+                	query.append( " and yesCount = " + modelIssue.getYesCount() );
+                }
+
+                if( modelIssue.getBallot() != null ) {
+                	query.append( " and ballotid = " + modelIssue.getBallot().getId() );
+                }
+
+            }
+		}
+		
+		try {
+
+            stmt = conn.createStatement();
+
+            // retrieve the persistent Person objects
+            //
+            if( stmt.execute( query.toString() ) ) { // statement returned a result
+                ResultSet rs = stmt.getResultSet();
+                long   id;
+                int    voteCount;
+                String question;
+                int    yesCount;
+                
+                while( rs.next() ) {
+
+                    id = rs.getLong( 1 );
+                    voteCount = rs.getInt( 2 );
+                    question = rs.getString( 3 );
+                    yesCount = rs.getInt( 4 );
+                                        
+                    Issue issue = objectLayer.createIssue( question, null );
+                    issue.setId( id );
+                    issue.setVoteCount(voteCount);
+                    issue.setYesCount(yesCount);
+
+                    issues.add( issue );
+
+                }
+                
+                return issues;
+            }
+        }
+        catch( Exception e ) {      // just in case...
+            throw new EVException( "IssueManager.restore: Could not restore persistent Issue object; Root cause: " + e );
+        }
+        
+        // if we get to this point, it's an error
+        throw new EVException( "IssueManager.restore: Could not restore persistent Issue objects" );
+    }
+
+}

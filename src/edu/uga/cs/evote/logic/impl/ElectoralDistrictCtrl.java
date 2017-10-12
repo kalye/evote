@@ -1,0 +1,45 @@
+package edu.uga.cs.evote.logic.impl;
+
+import java.util.List;
+
+import edu.uga.cs.evote.EVException;
+import edu.uga.cs.evote.entity.ElectoralDistrict;
+import edu.uga.cs.evote.entity.Voter;
+import edu.uga.cs.evote.object.ObjectLayer;
+
+public class ElectoralDistrictCtrl {
+
+	private ObjectLayer objectLayer;
+	
+	public ElectoralDistrictCtrl(ObjectLayer objectLayer) {
+		this.objectLayer = objectLayer;
+	}
+
+	public long addToElectoralDistrict(Voter voter, ElectoralDistrict electoralDistrict) throws EVException {
+		voter.setElectoralDistrict(electoralDistrict);
+		objectLayer.storeVoter(voter);
+		return voter.getId();
+	}
+	
+	public long createElectoralDistrict(String name, String zipCode) throws EVException {
+		
+		ElectoralDistrict				electoralDistrict = null;
+		
+		electoralDistrict = objectLayer.createElectoralDistrict( name, zipCode );
+        objectLayer.storeElectoralDistrict( electoralDistrict );
+
+        return electoralDistrict.getId();
+	}
+	
+	public List<ElectoralDistrict> findAllElectoralDistricts()
+            throws EVException
+    {
+        List<ElectoralDistrict> 	electoralDistricts  = null;
+        
+        ElectoralDistrict modelElectoralDistrict = objectLayer.createElectoralDistrict();
+        electoralDistricts = objectLayer.findElectoralDistrict( modelElectoralDistrict );
+
+        return electoralDistricts;
+    }
+
+}

@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/team4/!svn/ver/865/evote/src/edu/uga/cs/evote/presentation
+END
+EditDistrictQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/team4/!svn/ver/762/evote/src/edu/uga/cs/evote/presentation/EditDistrictQuery.java
+END
+ListResultsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/760/evote/src/edu/uga/cs/evote/presentation/ListResultsQuery.java
+END
+ListIssuesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/team4/!svn/ver/856/evote/src/edu/uga/cs/evote/presentation/ListIssuesQuery.java
+END
+UpdateCandidateQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdateCandidateQuery.java
+END
+DeleteIssue.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/team4/!svn/ver/494/evote/src/edu/uga/cs/evote/presentation/DeleteIssue.java
+END
+EditPartyQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/team4/!svn/ver/767/evote/src/edu/uga/cs/evote/presentation/EditPartyQuery.java
+END
+ListElectionsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/team4/!svn/ver/856/evote/src/edu/uga/cs/evote/presentation/ListElectionsQuery.java
+END
+CreateIssueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/700/evote/src/edu/uga/cs/evote/presentation/CreateIssueQuery.java
+END
+CreateBallotQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/team4/!svn/ver/632/evote/src/edu/uga/cs/evote/presentation/CreateBallotQuery.java
+END
+UpdateElectionQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdateElectionQuery.java
+END
+EditElectionQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/team4/!svn/ver/720/evote/src/edu/uga/cs/evote/presentation/EditElectionQuery.java
+END
+ViewProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/ViewProfileQuery.java
+END
+DeRegisterQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/team4/!svn/ver/692/evote/src/edu/uga/cs/evote/presentation/DeRegisterQuery.java
+END
+ListPartiesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/867/evote/src/edu/uga/cs/evote/presentation/ListPartiesQuery.java
+END
+ViewVoterProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/667/evote/src/edu/uga/cs/evote/presentation/ViewVoterProfileQuery.java
+END
+LogoutQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/team4/!svn/ver/687/evote/src/edu/uga/cs/evote/presentation/LogoutQuery.java
+END
+CreatePartyQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/618/evote/src/edu/uga/cs/evote/presentation/CreatePartyQuery.java
+END
+UpdateBallotQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdateBallotQuery.java
+END
+EditBallotQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/team4/!svn/ver/716/evote/src/edu/uga/cs/evote/presentation/EditBallotQuery.java
+END
+ListCandidatesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/856/evote/src/edu/uga/cs/evote/presentation/ListCandidatesQuery.java
+END
+UpdateIssueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdateIssueQuery.java
+END
+ListBallotsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/ListBallotsQuery.java
+END
+ListVoterBallotItemsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/team4/!svn/ver/855/evote/src/edu/uga/cs/evote/presentation/ListVoterBallotItemsQuery.java
+END
+ListElectionResultQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/ListElectionResultQuery.java
+END
+ListElectionResultVoterQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/team4/!svn/ver/538/evote/src/edu/uga/cs/evote/presentation/ListElectionResultVoterQuery.java
+END
+EditEOProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/team4/!svn/ver/791/evote/src/edu/uga/cs/evote/presentation/EditEOProfileQuery.java
+END
+ChangeEOPasswordQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/667/evote/src/edu/uga/cs/evote/presentation/ChangeEOPasswordQuery.java
+END
+EditCandidateQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/team4/!svn/ver/843/evote/src/edu/uga/cs/evote/presentation/EditCandidateQuery.java
+END
+VoteOnBallot.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/team4/!svn/ver/664/evote/src/edu/uga/cs/evote/presentation/VoteOnBallot.java
+END
+UpdatePartyQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdatePartyQuery.java
+END
+ResetPassword.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/team4/!svn/ver/695/evote/src/edu/uga/cs/evote/presentation/ResetPassword.java
+END
+AreYouSureQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/team4/!svn/ver/865/evote/src/edu/uga/cs/evote/presentation/AreYouSureQuery.java
+END
+RegisterQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/team4/!svn/ver/503/evote/src/edu/uga/cs/evote/presentation/RegisterQuery.java
+END
+ListVoterBallotsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/718/evote/src/edu/uga/cs/evote/presentation/ListVoterBallotsQuery.java
+END
+CreateCandidateQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/team4/!svn/ver/839/evote/src/edu/uga/cs/evote/presentation/CreateCandidateQuery.java
+END
+ListDistrictsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/team4/!svn/ver/856/evote/src/edu/uga/cs/evote/presentation/ListDistrictsQuery.java
+END
+LoginQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/team4/!svn/ver/664/evote/src/edu/uga/cs/evote/presentation/LoginQuery.java
+END
+ApproveResultsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/751/evote/src/edu/uga/cs/evote/presentation/ApproveResultsQuery.java
+END
+CreateDistrictQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/416/evote/src/edu/uga/cs/evote/presentation/CreateDistrictQuery.java
+END
+UpdateVoterProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/team4/!svn/ver/711/evote/src/edu/uga/cs/evote/presentation/UpdateVoterProfileQuery.java
+END
+EditVoterProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/711/evote/src/edu/uga/cs/evote/presentation/EditVoterProfileQuery.java
+END
+EditIssueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/team4/!svn/ver/569/evote/src/edu/uga/cs/evote/presentation/EditIssueQuery.java
+END
+UpdateVoterRecordQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/team4/!svn/ver/717/evote/src/edu/uga/cs/evote/presentation/UpdateVoterRecordQuery.java
+END
+ChangeVoterPasswordQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/team4/!svn/ver/667/evote/src/edu/uga/cs/evote/presentation/ChangeVoterPasswordQuery.java
+END
+CreateElectionQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/725/evote/src/edu/uga/cs/evote/presentation/CreateElectionQuery.java
+END
+UpdateEOProfileQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/team4/!svn/ver/711/evote/src/edu/uga/cs/evote/presentation/UpdateEOProfileQuery.java
+END
+UpdateDistrictQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/854/evote/src/edu/uga/cs/evote/presentation/UpdateDistrictQuery.java
+END

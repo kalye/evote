@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/team4/!svn/ver/498/evote/db
+END
+evote-populate.sql
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/318/evote/db/evote-populate.sql
+END
+evote-retrieve.sql
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/318/evote/db/evote-retrieve.sql
+END
+DbAccessConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/team4/!svn/ver/321/evote/db/DbAccessConfig.java
+END
+DbUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/team4/!svn/ver/321/evote/db/DbUtils.java
+END
+evote-schema.sql
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/team4/!svn/ver/498/evote/db/evote-schema.sql
+END

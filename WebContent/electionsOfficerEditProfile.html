@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Edit Profile</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="ElectionsOfficerHome.html">eVote - Elections
+					Officer</a>
+			</div>
+
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">View/Update <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="ListDistrictsQuery">Electoral
+								Districts</a></li>
+						<li><a href="ListPartiesQuery">Political
+								Parties</a></li>
+						<li><a href="ListBallotsQuery">Ballots</a></li>
+					</ul></li>
+				<li><a href="ViewProfileQuery">View Profile</a></li>
+				<li><a href="successAnon.html">Log Out</a>
+			</ul>
+		</div>
+	</nav>
+	
+	<h1>Edit Profile</h1>
+	<form>
+		<div class="form-group">
+			<label for="fname">First Name:</label> <input type="fname"
+				class="form-control" id="fname" placeholder="Harry">
+		</div>
+		<div class="form-group">
+			<label for="lname">Last Name:</label> <input type="lname"
+				class="form-control" id="lname" placeholder="Potter">
+		</div>
+		<div class="form-group">
+			<label for="email">Email Address:</label> <input type="email"
+				class="form-control" id="email"
+				placeholder="theboywholived@hogwards.edu">
+		</div>
+		<div class="form-group">
+			<label for="address">Address:</label> <input type="address"
+				class="form-control" id="address"
+				placeholder="The Cupboard Under the Stairs">
+		</div>
+		<div class="form-group">
+			<label for="zip">Zip Code:</label> <input type="zip"
+				class="form-control" id="zip" placeholder="00000">
+		</div>
+		<h3>Change Password</h3>
+		<div class="form-group">
+			<label for="pwd">Current Password:</label> <input type="password"
+				class="form-control" id="pwd"
+				placeholder="Enter your current password">
+		</div>
+		<div class="form-group">
+			<label for="pwd">New Password:</label> <input type="password"
+				class="form-control" id="pwd" placeholder="Enter your new password">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Re-Enter New Password:</label> <input
+				type="password" class="form-control" id="pwd"
+				placeholder="Re-enter your new password">
+		</div>
+	</form>
+	<button type="save" class="btn btn-default"
+		onclick="javascript:window.location.href='profile.html'; return false;">Save Changes</button>
+	<button type="cancel" class="btn btn-default"
+		onclick="javascript:window.location.href='profile.html'; return false;">Cancel</button>
+</body>
+</html>

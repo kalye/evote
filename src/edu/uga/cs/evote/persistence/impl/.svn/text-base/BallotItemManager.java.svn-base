@@ -1,0 +1,323 @@
+package evote.src.edu.uga.cs.evote.persistence.impl;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import evote.src.edu.uga.cs.evote.EVException;
+import evote.src.edu.uga.cs.evote.entity.Ballot;
+import evote.src.edu.uga.cs.evote.entity.BallotItem;
+import evote.src.edu.uga.cs.evote.entity.Election;
+import evote.src.edu.uga.cs.evote.entity.Issue;
+import evote.src.edu.uga.cs.evote.object.ObjectLayer;
+
+public class BallotItemManager {
+	
+	
+	private ObjectLayer objectLayer = null;
+    private Connection  conn = null;
+
+		
+	public BallotItemManager(Connection conn, ObjectLayer objectLayer) {
+			// TODO Auto-generated constructor stub
+			this.conn = conn;
+			this.objectLayer = objectLayer;
+	}//BallotItemManager
+
+		public void store(BallotItem ballotItem, Ballot ballot) throws EVException{
+			// TODO Auto-generated method stub
+			
+			String               insertBallotItemSql = "insert into ballotItem (kind, voteCount, ballotid, question, yesCount, office, isPartisan) values ( ?, ?, ?, ?, ?, ?, ?)";              
+	        String               updateBallotItemSql = "update ballotItem set kind = ?, voteCount = ?, ballotId = ?, question = ?, yesCount = ?, office = ?, isPartisan = ? where id = ?";              
+	        PreparedStatement    stmt;
+	        int                  inscnt;
+	        long                 ballotItemId;
+			
+	        try {
+	        	if(!ballotItem.isPersistent()) {
+	        		stmt = (PreparedStatement) conn.prepareStatement(insertBallotItemSql);
+	        	} else {
+	        		stmt = (PreparedStatement) conn.prepareStatement(updateBallotItemSql);
+	        	}
+
+	        	//kind
+	        	stmt.setString(1, ballotItem.getKind());
+	        	
+	        	//voteCount
+	        	stmt.setInt(2, ballotItem.getVoteCount());
+	        	
+	        	//ballotId
+	        	stmt.setLong(3, ballot.getId());
+	        	
+	        	//question (or null if ballotItem is not an issue)
+	        	stmt.setString(4, ballotItem.getQuestion());
+	        	
+	        	//yesCount (or 0 if ballotItem is not an Issue)
+	        	stmt.setInt(5, ballotItem.getYesCount());
+	        	
+	        	//office (or null if ballotItem is not an election)
+	        	stmt.setString(6, ballotItem.getOffice());
+	        		
+	        	//isPartisan (or false if ballotItem is not an election)
+	        	stmt.setBoolean(7, ballotItem.getIsPartisan());
+	        	
+	        	//id
+	        	if(ballotItem.isPersistent()){
+	        		stmt.setLong(8, ballotItem.getId());
+	        	}
+
+	        	inscnt = stmt.executeUpdate();
+	        	
+	        	if( !ballotItem.isPersistent() ) {
+	                // in case this this object is stored for the first time,
+	                // we need to establish its persistent identifier (primary key)
+	                if( inscnt == 1 ) {
+	                    String sql = "select last_insert_id()";
+	                    if( stmt.execute( sql ) ) { // statement returned a result
+	                        // retrieve the result
+	                        ResultSet r = stmt.getResultSet();
+	                        // we will use only the first row!
+	                        while( r.next() ) {
+	                            // retrieve the last insert auto_increment value
+	                            ballotItemId = r.getLong( 1 );
+	                            if( ballotItemId > 0 )
+	                                ballotItem.setId( ballotItemId ); // set this person's db id (proxy object)
+	                        }
+	                    }
+	                }
+	            }
+	            else {
+	                if( inscnt < 1 )
+	                    throw new EVException( "ballotItemManager.save: failed to save a Ballot Item" ); 
+	            }
+	        	
+	        } catch (SQLException e) {
+	        	e.printStackTrace();
+	        	throw new EVException("ballotItemManager.save: failed to save a Ballot Item: " + e);
+	        }
+
+		} //store
+		
+		public void delete(BallotItem ballotItem) 
+	            throws EVException
+	    {
+	        String               deleteBallotItemSql = "delete from ballotItem where id = ?";              
+	        PreparedStatement    stmt = null;
+	        int                  inscnt;
+	        
+	        // form the query based on the given Ballot Item object instance
+	        if( !ballotItem.isPersistent() ) // is the Ballot Item object persistent?  If not, nothing to actually delete
+	            throw new EVException( "ballotItemManager.delete: failed to delete this Ballot Item");
+	        
+	        try {
+	            
+	            //DELETE t1, t2 FROM t1, t2 WHERE t1.id = t2.id;
+	            //DELETE FROM t1, t2 USING t1, t2 WHERE t1.id = t2.id;
+	            stmt = (PreparedStatement) conn.prepareStatement( deleteBallotItemSql );
+	            
+	            stmt.setLong( 1, ballotItem.getId() );
+	            
+	            inscnt = stmt.executeUpdate();
+	            
+	            if( inscnt == 0 ) {
+	                throw new EVException( "ballotItemManager.delete: failed to delete this Ballot Item" );
+	            }
+	        }
+	        catch( SQLException e ) {
+	            throw new EVException( "ballotItemManager.delete: failed to delete this Ballot Item: " + e.getMessage() );
+	        }
+	    }
+		
+		public List<BallotItem> restore(BallotItem modelBallotItem) throws EVException {
+			
+			String selectBallotItemSql = "select id, kind, voteCount, question, yesCount, office, isPartisan from ballotItem";
+			Statement stmt = null;
+			StringBuffer query = new StringBuffer(100);
+			StringBuffer condition = new StringBuffer(100);
+			List<BallotItem> ballotItems = new ArrayList<BallotItem>();
+			System.out.println("######QUERY: " + query);
+			condition.setLength(0);
+			
+			//form query based on BallotItem Object
+			query.append(selectBallotItemSql);
+			
+			if(modelBallotItem != null) {
+				if(modelBallotItem.getId() >= 0){
+					query.append(" id = " + modelBallotItem.getId());
+				}else {
+					
+					if(modelBallotItem.getKind() != null){
+						if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " kind = '" + modelBallotItem.getKind() + "'" );
+	                }
+					
+					if( modelBallotItem.getBallot() != null){
+	                	
+	                	if(condition.length() > 0){
+	                		
+	                		condition.append(" and");
+	                	}
+	                	condition.append(" ballotid = " + modelBallotItem.getBallot().getId());
+	                }
+
+	                if( modelBallotItem.getVoteCount() != 0 ){
+	                	if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " voteCount = " + modelBallotItem.getVoteCount());
+	                }
+	                    
+	                if( modelBallotItem.getQuestion() != null){
+	                	if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " question = " + modelBallotItem.getQuestion());
+	                }
+	                
+	                if( modelBallotItem.getYesCount() != 0){
+	                	if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " yesCount = " + modelBallotItem.getYesCount());
+	                }
+	                
+	                if( modelBallotItem.getOffice() != null){
+	                	if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " office = " + modelBallotItem.getOffice());
+	                }
+	                
+	                if( modelBallotItem.getIsPartisan() ){
+	                	if(condition.length() > 0)
+	                		condition.append(" and");
+	                    condition.append( " isPartisan = " + modelBallotItem.getIsPartisan());
+	                }
+	                
+	                if( condition.length() > 0 ) {
+	                    query.append(  " where" );
+	                    query.append( condition );
+	                }
+	            }
+			}
+			
+			try {
+
+	            stmt = conn.createStatement();
+
+	            // retrieve the persistent BallotItem objects
+	            //
+	            if( stmt.execute( query.toString() ) ) { // statement returned a result
+	                ResultSet rs = stmt.getResultSet();
+	                long   id;
+	                String kind;
+	                int voteCount;
+	                String question;
+	                int yesCount;
+	                String office;
+	                boolean isPartisan;
+	               
+	                
+	                while( rs.next() ) {
+
+	                    id = rs.getLong(1);
+	                    voteCount = rs.getInt(3);
+	                    kind = rs.getString(2);
+	                    
+	                    question = rs.getString(5);
+	                    yesCount = rs.getInt(6);
+	                    office = rs.getString(7);
+	                    isPartisan = rs.getBoolean(8);
+	                    
+	                    //BallotItem ballotItem = objectLayer.createBallotItem( id, voteCount );
+	                    System.out.println("####GETTING THE BALLOTITEMS" + kind);
+	                    System.out.println("###ANY QUESTION??" + question);
+	                    if(kind.equals("issue")){
+	                    	Issue issueItem = objectLayer.createIssue(question, null);
+	                    	System.out.println("#######I GOT A QUESTION" + question);
+	                    	issueItem.setId( id );
+	                    	issueItem.setVoteCount(voteCount);
+	                    	issueItem.setYesCount(yesCount);
+		                    ballotItems.add( issueItem );
+	                    }
+	                    else if(kind.equals("election")){
+	                    	Election electionItem = objectLayer.createElection(office, isPartisan, null);
+	                    	electionItem.setId( id );
+	                    	electionItem.setVoteCount(voteCount);
+		                    ballotItems.add(electionItem);
+	                    }
+	                }
+	                
+	                return ballotItems;
+	            }
+	        }
+	        catch( Exception e ) {      // just in case...
+	            throw new EVException( "BallotItemManager.restore: Could not restore persistent Elections Officer object; Root cause: " + e );
+	        }
+	        
+	        // if we get to this point, it's an error
+	        throw new EVException( "BallotItemManager.restore: Could not restore persistent Elections Officer objects" );
+	    }//restore
+		
+		public Ballot restoreBallotIncludesBallotItem(BallotItem ballotItem) 
+	            throws EVException
+	    {
+
+	        String       selectBallotSql = "select b.id, b.openDate, b.closeDate, i.ballotid from ballot b, ballotItem i where b.id = i.ballotid";              
+	        Statement    stmt = null;
+	        StringBuffer query = new StringBuffer( 100 );
+	        StringBuffer condition = new StringBuffer( 100 );
+
+	        condition.setLength( 0 );
+	        
+	        // form the query based on the given BallotItem object instance
+	        query.append( selectBallotSql );
+	        
+	        if( ballotItem != null ) {
+	            if( ballotItem.getId() >= 0 ) // id is unique, so it is sufficient to get a person
+	                query.append( " and i.id = " + ballotItem.getId() );
+	            else throw new EVException("Unable to restore Ballot BallotIncludesBallotItem: non-unique BallotItem");
+	        } else throw new EVException("Unable to restore Ballot BallotIncludesBallotItem: ballotItem is undefined");
+	                    
+	        try {
+
+	            stmt = conn.createStatement();
+
+	            // retrieve the persistent Ballot object
+	            //
+	            if( stmt.execute( query.toString() ) ) { // statement returned a result
+	                ResultSet rs = stmt.getResultSet();
+	                
+	                long   id;
+	                Date openDate;
+	                Date closeDate;
+	                
+	                Ballot ballot = null;
+	                
+	                while( rs.next() ) {
+
+	                    id = rs.getLong( 1 );
+	                    openDate = rs.getDate( 2 );
+	                    closeDate = rs.getDate( 3 );
+	                    ballot = objectLayer.createBallot();
+	                    ballot.setId( id );
+	                    ballot.setOpenDate(openDate);
+	                    ballot.setCloseDate(closeDate);
+	                    return ballot;
+	                }
+	                
+	                return ballot;
+	            }
+	            else
+	                return null;
+	        }
+	        catch( Exception e ) {      // just in case...
+	            throw new EVException( "BallotItemManager.restoreBallotIncludesBallotItem: Could not restore persistent Ballot object; Root cause: " + e );
+	        }
+	    }
+
+	}
+
+

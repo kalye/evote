@@ -1,0 +1,335 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/team4/!svn/ver/864/evote/WebContent
+END
+anonHeader.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/team4/!svn/ver/428/evote/WebContent/anonHeader.html
+END
+searchCandidates.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/853/evote/WebContent/searchCandidates.html
+END
+voterHeader.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/428/evote/WebContent/voterHeader.html
+END
+invalidDataOfficer.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/team4/!svn/ver/853/evote/WebContent/invalidDataOfficer.html
+END
+createElection.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/team4/!svn/ver/853/evote/WebContent/createElection.html
+END
+successOfficer.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/team4/!svn/ver/853/evote/WebContent/successOfficer.html
+END
+emptyFieldsAnon.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/428/evote/WebContent/emptyFieldsAnon.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/428/evote/WebContent/index.html
+END
+UpdatePoliticalParties.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/team4/!svn/ver/343/evote/WebContent/UpdatePoliticalParties.html
+END
+successAnon.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/428/evote/WebContent/successAnon.html
+END
+wrongEmail.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/team4/!svn/ver/659/evote/WebContent/wrongEmail.html
+END
+invalidDataAnon.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/428/evote/WebContent/invalidDataAnon.html
+END
+noEdit.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/team4/!svn/ver/805/evote/WebContent/noEdit.html
+END
+duplicateOfficer.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/667/evote/WebContent/duplicateOfficer.html
+END
+Vote.html
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/team4/!svn/ver/343/evote/WebContent/Vote.html
+END
+createParty.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/853/evote/WebContent/createParty.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/428/evote/WebContent/login.html
+END
+viewBallot.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/team4/!svn/ver/343/evote/WebContent/viewBallot.html
+END
+electionsOfficerViewProfile.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/team4/!svn/ver/585/evote/WebContent/electionsOfficerViewProfile.html
+END
+VoterHome.html
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/team4/!svn/ver/428/evote/WebContent/VoterHome.html
+END
+createCandidate.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/853/evote/WebContent/createCandidate.html
+END
+updateBallots.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/team4/!svn/ver/815/evote/WebContent/updateBallots.html
+END
+DeRegisterVoter.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/667/evote/WebContent/DeRegisterVoter.html
+END
+register.html
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/team4/!svn/ver/428/evote/WebContent/register.html
+END
+emptyFieldsVoter.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/428/evote/WebContent/emptyFieldsVoter.html
+END
+searchIssues.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/team4/!svn/ver/853/evote/WebContent/searchIssues.html
+END
+AreYouSure.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/team4/!svn/ver/853/evote/WebContent/AreYouSure.html
+END
+createBallot.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/team4/!svn/ver/853/evote/WebContent/createBallot.html
+END
+updateParty.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/585/evote/WebContent/updateParty.html
+END
+searchDistricts.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/853/evote/WebContent/searchDistricts.html
+END
+wrongLogin.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/team4/!svn/ver/428/evote/WebContent/wrongLogin.html
+END
+searchParties.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/team4/!svn/ver/864/evote/WebContent/searchParties.html
+END
+SearchCandidate.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/771/evote/WebContent/SearchCandidate.html
+END
+updateCandidate.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/585/evote/WebContent/updateCandidate.html
+END
+UpdateCandidates.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/343/evote/WebContent/UpdateCandidates.html
+END
+objectAlreadyExists.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/team4/!svn/ver/853/evote/WebContent/objectAlreadyExists.html
+END
+searchElections.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/team4/!svn/ver/853/evote/WebContent/searchElections.html
+END
+UpdateElectoralDistricts.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/team4/!svn/ver/343/evote/WebContent/UpdateElectoralDistricts.html
+END
+emptyFieldsOfficer.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/team4/!svn/ver/853/evote/WebContent/emptyFieldsOfficer.html
+END
+reset.html
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/656/evote/WebContent/reset.html
+END
+GoBack.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/team4/!svn/ver/343/evote/WebContent/GoBack.html
+END
+updateBallot.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/team4/!svn/ver/428/evote/WebContent/updateBallot.html
+END
+createDistrict.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/team4/!svn/ver/853/evote/WebContent/createDistrict.html
+END
+userAlreadyExists.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/team4/!svn/ver/428/evote/WebContent/userAlreadyExists.html
+END
+electionsOfficerHeader.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/team4/!svn/ver/570/evote/WebContent/electionsOfficerHeader.html
+END
+Vote2.html
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/team4/!svn/ver/343/evote/WebContent/Vote2.html
+END
+invalidDataVoter.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/team4/!svn/ver/428/evote/WebContent/invalidDataVoter.html
+END
+emptyFields.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/585/evote/WebContent/emptyFields.html
+END
+successVoter.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/team4/!svn/ver/428/evote/WebContent/successVoter.html
+END
+BallotCreation.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/team4/!svn/ver/428/evote/WebContent/BallotCreation.html
+END
+electionsOfficerEditProfile.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/team4/!svn/ver/585/evote/WebContent/electionsOfficerEditProfile.html
+END
+ViewVoteOpenBallot.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/team4/!svn/ver/343/evote/WebContent/ViewVoteOpenBallot.html
+END
+createIssue.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/team4/!svn/ver/853/evote/WebContent/createIssue.html
+END
+duplicateVoter.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/team4/!svn/ver/667/evote/WebContent/duplicateVoter.html
+END
+ElectionsOfficerHome.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/team4/!svn/ver/853/evote/WebContent/ElectionsOfficerHome.html
+END

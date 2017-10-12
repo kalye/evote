@@ -1,0 +1,83 @@
+10
+
+dir
+865
+http://uml.cs.uga.edu/svn/team4/evote/src/edu/uga/cs/evote
+http://uml.cs.uga.edu/svn/team4
+
+
+
+2016-12-07T01:43:17.674920Z
+865
+facey
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+88a1aa1d-dc71-40da-9c5c-efc5dba32f08
+
+EVException.java
+file
+
+
+
+
+2016-11-29T00:04:56.000000Z
+bccafb67c0159a3e548f30c931b8b27a
+2016-10-24T19:04:45.893971Z
+60
+huynh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+613
+
+entity
+dir
+
+logic
+dir
+
+object
+dir
+
+persistence
+dir
+
+presentation
+dir
+
+session
+dir
+
+test
+dir
+

@@ -1,0 +1,272 @@
+package edu.uga.cs.evote.test.object;
+
+import java.sql.Connection;
+import java.util.Date;
+import java.util.List;
+
+import edu.uga.cs.evote.EVException;
+import edu.uga.cs.evote.db.DbUtils;
+import edu.uga.cs.evote.entity.Ballot;
+import edu.uga.cs.evote.entity.BallotItem;
+import edu.uga.cs.evote.entity.Candidate;
+import edu.uga.cs.evote.entity.Election;
+import edu.uga.cs.evote.entity.ElectionsOfficer;
+import edu.uga.cs.evote.entity.ElectoralDistrict;
+import edu.uga.cs.evote.entity.Issue;
+import edu.uga.cs.evote.entity.PoliticalParty;
+import edu.uga.cs.evote.entity.VoteRecord;
+import edu.uga.cs.evote.entity.Voter;
+import edu.uga.cs.evote.entity.impl.BallotImpl;
+import edu.uga.cs.evote.entity.impl.BallotItemImpl;
+import edu.uga.cs.evote.entity.impl.CandidateImpl;
+import edu.uga.cs.evote.entity.impl.ElectionImpl;
+import edu.uga.cs.evote.entity.impl.ElectionsOfficerImpl;
+import edu.uga.cs.evote.entity.impl.IssueImpl;
+import edu.uga.cs.evote.entity.impl.PoliticalPartyImpl;
+import edu.uga.cs.evote.entity.impl.UserImpl;
+import edu.uga.cs.evote.entity.impl.VoteRecordImpl;
+import edu.uga.cs.evote.entity.impl.VoterImpl;
+import edu.uga.cs.evote.object.ObjectLayer;
+import edu.uga.cs.evote.object.impl.ObjectLayerImpl;
+import edu.uga.cs.evote.persistence.PersistenceLayer;
+import edu.uga.cs.evote.persistence.impl.PersistenceLayerImpl;
+import edu.uga.cs.evote.entity.impl.ElectoralDistrictImpl;
+
+public class ReadTest
+{
+    public static void main(String[] args) throws EVException
+    {
+         Connection  conn = null;
+         ObjectLayer objectLayer = null;
+         PersistenceLayer persistence = null;
+
+         // get a database connection
+         try {
+             conn = DbUtils.connect();
+         } 
+         catch(Exception seq) {
+             System.err.println( "ReadTest: Unable to obtain a database connection" );
+         }
+         
+         if( conn == null ) {
+             System.out.println( "ReadTest: failed to connect to the database" );
+             return;
+         }
+         
+         // obtain a reference to the ObjectModel module      
+         objectLayer = new ObjectLayerImpl();
+         // obtain a reference to Persistence module and connect it to the ObjectModel        
+         persistence = new PersistenceLayerImpl(conn, objectLayer); 
+         // connect the ObjectModel module to the Persistence module
+         objectLayer = new ObjectLayerImpl(persistence);  
+         
+ 		BallotImpl.setPersistenceLayer(persistence);
+ 		if(BallotImpl.getPersistenceLayer() == null) System.out.println("no persistence for ballot");
+ 		
+ 		BallotItemImpl.setPersistenceLayer(persistence);
+ 		if(BallotItemImpl.getPersistenceLayer() == null) System.out.println("no persistence for ballotitem");
+ 		
+ 		CandidateImpl.setPersistenceLayer(persistence);
+ 		if(CandidateImpl.getPersistenceLayer() == null) System.out.println("no persistence for candidate");
+ 		
+ 		ElectionImpl.setPersistenceLayer(persistence);
+ 		if(ElectionImpl.getPersistenceLayer() == null) System.out.println("no persistence for election");
+ 		
+ 		ElectionsOfficerImpl.setPersistenceLayer(persistence);
+ 		if(ElectionsOfficerImpl.getPersistenceLayer() == null) System.out.println("no persistence for electionsofficer");
+ 		
+ 		ElectoralDistrictImpl.setPersistenceLayer(persistence);
+ 		if(ElectoralDistrictImpl.getPersistenceLayer() == null) System.out.println("no persistence for electoraldistrict");
+ 		
+ 		IssueImpl.setPersistenceLayer(persistence);
+ 		if(IssueImpl.getPersistenceLayer() == null) System.out.println("no persistence for issue");
+ 		
+ 		PoliticalPartyImpl.setPersistenceLayer(persistence);
+ 		if(PoliticalPartyImpl.getPersistenceLayer() == null) System.out.println("no persistence for party");
+ 		
+ 		UserImpl.setPersistenceLayer(persistence);
+ 		if(UserImpl.getPersistenceLayer() == null) System.out.println("no persistence for user");
+ 		
+ 		VoteRecordImpl.setPersistenceLayer(persistence);
+ 		if(VoteRecordImpl.getPersistenceLayer() == null) System.out.println("no persistence for voterecord");
+ 		
+ 		VoterImpl.setPersistenceLayer(persistence);
+ 		if(VoterImpl.getPersistenceLayer() == null) System.out.println("no persistence for voter");
+                  
+         try {
+             
+             System.out.println( "\n================== Ballot objects ===================" );
+             List<Ballot> ballots = objectLayer.findBallot( null );
+             for( Ballot ballot : ballots ) {
+                 System.out.println(ballot);
+                 Date openDate = ballot.getOpenDate();
+                 System.out.println( "\tOpen Date: " + openDate );
+                 Date closeDate = ballot.getCloseDate();
+                 System.out.println( "\tClose Date: " + closeDate );
+                 ElectoralDistrict ed = ballot.getElectoralDistrict();
+                 if(ed != null)
+                	 System.out.println( "\tElectoral District: " + ed.getName() );
+                 List<BallotItem> bi = ballot.getBallotItems();
+                 System.out.println("\tBallot Items: ");
+                 for(BallotItem ballotItem : bi){
+                	 if(ballotItem.getKind().equals("issue"))
+                		 System.out.println("\t\t" + ballotItem.getQuestion());
+                	 else
+                		 System.out.println("\t\t" + ballotItem.getOffice());
+                 }
+                 List<VoteRecord> vr = ballot.getVoterVoteRecords();
+                 System.out.println("\tVote Record: ");
+                 for(VoteRecord voteRecord : vr){
+                	 System.out.println("\t\t" + voteRecord.getVoter().getFirstName() + " " + voteRecord.getVoter().getLastName() +
+                			 			", " + voteRecord.getDate());
+                 }
+             }
+             System.out.println( "=====================================================" );
+             System.out.println( "================ Candidate objects ==================" );
+             List<Candidate> candidates = objectLayer.findCandidate( null );
+             for( Candidate candidate : candidates ) {
+                 String name = candidate.getName();
+                 System.out.println("   Name: " + name);
+                 int voteCount = candidate.getVoteCount();
+                 System.out.println("   Vote Count: " + voteCount);
+                 String election = candidate.getElection().getOffice();
+                 System.out.println("   Election: " + election);
+                 String pp = candidate.getPoliticalParty().getName();
+                 System.out.println("   Political Party: " + pp);
+             }
+             System.out.println( "=====================================================" );
+             System.out.println("=================== Election objects ================");
+             List<Election> elections = objectLayer.findElection(null);
+             for(Election election : elections){
+            	 System.out.println(election);
+            	 String office = election.getOffice();
+            	 System.out.println("   Office: " + office);
+            	 boolean isPartisan = election.getIsPartisan();
+            	 System.out.println("   Is Partisan: " + isPartisan);
+            	
+            	 List<Candidate> electionCandidates = election.getCandidates();
+            	 System.out.println("   Candidates in Election:");
+            	 for(Candidate c : electionCandidates){
+            		 System.out.println("      " + c.getName());
+            	 }
+             }
+             System.out.println( "=====================================================" );
+             System.out.println("=================== Elections Officer objects =======");
+             List<ElectionsOfficer> electionsOfficers = objectLayer.findElectionsOfficer(null);
+             for(ElectionsOfficer electionsOfficer : electionsOfficers){
+            	 String firstName = electionsOfficer.getFirstName();
+            	 System.out.println("   First Name: " + firstName);
+            	 String lastName = electionsOfficer.getLastName();
+            	 System.out.println("   Last Name: " + lastName);
+            	 String address = electionsOfficer.getAddress();
+            	 System.out.println("   Address: " + address);
+            	 String emailAddress = electionsOfficer.getEmailAddress();
+            	 System.out.println("   Email Address: " + emailAddress);
+            	 String password = electionsOfficer.getPassword();
+            	 System.out.println("   Password: " + password);
+            	 String username = electionsOfficer.getUserName();
+            	 System.out.println("   Username: " + username);
+             }
+             System.out.println( "=====================================================" );
+             System.out.println("=================== Electoral Distict objects =======");
+             List<ElectoralDistrict> electoralDistricts = objectLayer.findElectoralDistrict(null);
+             for(ElectoralDistrict electoralDistrict : electoralDistricts){
+            	 String name = electoralDistrict.getName();
+            	 System.out.println("   Name: " + name);
+            	 List<Voter> districtVoters = electoralDistrict.getVoters();
+            	 System.out.println("   Voters: ");
+            	 for(Voter voter : districtVoters){
+            		 System.out.println("      " + voter.getFirstName() + " " + voter.getLastName());
+            	 }
+            	 List<Ballot> districtBallots = electoralDistrict.getBallots();
+            	 System.out.println("   Ballots: ");
+            	 for(Ballot districtBallot : districtBallots){
+            		 System.out.println("      " + districtBallot.getId());
+            	 }
+             }
+             
+             System.out.println( "=====================================================" );
+             System.out.println("=============== Issue objects =======================");
+             List<Issue> issues = objectLayer.findIssue(null);
+             for(Issue issue : issues){
+            	 String question = issue.getQuestion();
+            	 System.out.println("   Question: " + question);
+            	 int yesCount = issue.getYesCount();
+            	 System.out.println("   Yes Count: " + yesCount);
+            	 int noCount = issue.getNoCount();
+            	 System.out.println("    No Count: " + noCount);
+             }
+             System.out.println( "=====================================================" );
+             System.out.println("============== Political Party objects ==============");
+             List<PoliticalParty> politicalParties = objectLayer.findPoliticalParty(null);
+             for(PoliticalParty politicalParty : politicalParties){
+            	 String name = politicalParty.getName();
+            	 System.out.println("   Name: " + name);
+            	 List<Candidate> ppCandidates = politicalParty.getCandidates();
+            	 System.out.println("   Candidates in Poltiical Party:");
+            	 for(Candidate ppCandidate : ppCandidates){
+            		 System.out.println("      " + ppCandidate.getName());
+            	 }
+             }
+             System.out.println( "=====================================================" );
+             System.out.println(" ============== Voter objects =======================");
+             List<Voter> voters = objectLayer.findVoter(null);
+             for(Voter voter : voters){
+            	 String firstName = voter.getFirstName();
+            	 System.out.println("   First Name: " + firstName);
+            	 String lastName = voter.getLastName();
+            	 System.out.println("   Last Name: " + lastName);
+            	 String address = voter.getAddress();
+            	 System.out.println("   Address: " + address);
+            	 String emailAddress = voter.getEmailAddress();
+            	 System.out.println("   Email Address: " + emailAddress);
+            	 String password = voter.getPassword();
+            	 System.out.println("   Password: " + password);
+            	 String username = voter.getUserName();
+            	 System.out.println("   Username: " + username);
+            	 int age = voter.getAge();
+            	 System.out.println("   Age: " + age);
+            	 ElectoralDistrict voterED = voter.getElectoralDistrict();
+            	 System.out.println("   Electoral District: " + voterED.getName());
+            	 List<VoteRecord> voterVR = voter.getBallotVoteRecords();
+            	 System.out.println("   Ballot Vote Records:");
+            	 for(VoteRecord vr : voterVR){
+            		 System.out.println("      " + vr.getBallotid() + ", " + vr.getDate());
+            	 }
+             }
+             System.out.println( "=====================================================" ); 
+             System.out.println("============== Vote Record objects ==================");
+             List<VoteRecord> voteRecords = objectLayer.findVoteRecord(null);
+             for(VoteRecord voteRecord : voteRecords){
+            	 System.out.println(voteRecord);
+            	 Ballot voterBallot = voteRecord.getBallot();
+            	 System.out.println("   Ballot: " + voterBallot.getId());
+            	 Date voterDate = voteRecord.getDate();
+            	 System.out.println("   Date: " + voterDate);
+            	 Voter voterVoting = voteRecord.getVoter();
+            	 System.out.println("   Voter: " + voterVoting.getFirstName() + " " + voterVoting.getLastName());
+             }
+         }
+         catch( EVException ce)
+         {
+             System.err.println( "EVException: " + ce );
+             ce.printStackTrace();
+         }
+         catch( Exception e)
+         {
+             System.out.flush();
+             System.err.println( "Exception: " + e );
+             e.printStackTrace();
+         }
+         finally {
+             // close the connection
+             try {
+                 conn.close();
+             }
+             catch( Exception e ) {
+                 System.err.println( "Exception: " + e );
+                 e.printStackTrace();
+             }
+         }
+    }   
+}

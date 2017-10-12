@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/team4/!svn/ver/738/evote/src/edu/uga/cs/evote/persistence/impl
+END
+CandidateManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/team4/!svn/ver/722/evote/src/edu/uga/cs/evote/persistence/impl/CandidateManager.java
+END
+BallotManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/team4/!svn/ver/649/evote/src/edu/uga/cs/evote/persistence/impl/BallotManager.java
+END
+Persistent.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/team4/!svn/ver/314/evote/src/edu/uga/cs/evote/persistence/impl/Persistent.java
+END
+BallotItemManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/722/evote/src/edu/uga/cs/evote/persistence/impl/BallotItemManager.java
+END
+VoterManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/437/evote/src/edu/uga/cs/evote/persistence/impl/VoterManager.java
+END
+IssueManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/team4/!svn/ver/722/evote/src/edu/uga/cs/evote/persistence/impl/IssueManager.java
+END
+PoliticalPartyManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/team4/!svn/ver/623/evote/src/edu/uga/cs/evote/persistence/impl/PoliticalPartyManager.java
+END
+ElectionManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/team4/!svn/ver/738/evote/src/edu/uga/cs/evote/persistence/impl/ElectionManager.java
+END
+PersistenceLayerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/team4/!svn/ver/395/evote/src/edu/uga/cs/evote/persistence/impl/PersistenceLayerImpl.java
+END
+VoteRecordManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/team4/!svn/ver/336/evote/src/edu/uga/cs/evote/persistence/impl/VoteRecordManager.java
+END
+ElectoralDistrictManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/team4/!svn/ver/450/evote/src/edu/uga/cs/evote/persistence/impl/ElectoralDistrictManager.java
+END
+ElectionsOfficerManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/team4/!svn/ver/722/evote/src/edu/uga/cs/evote/persistence/impl/ElectionsOfficerManager.java
+END

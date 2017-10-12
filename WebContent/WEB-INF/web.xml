@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <servlet>
+  <servlet-name>LoginQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.LoginQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>LogoutQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.LogoutQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateElectionQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateElectionQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CreateDistrictQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreateDistrictQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AreYouSureQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.AreYouSureQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>EditDistrictQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditDistrictQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListDistrictsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListDistrictsQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>RegisterQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.RegisterQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateDistrictQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateDistrictQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListBallotsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListBallotsQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListElectionResultQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListElectionResultQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CreateBallotQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreateBallotQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ViewVoterProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ViewVoterProfileQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListCandidatesQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListCandidatesQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListPartiesQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListPartiesQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateBallotQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateBallotQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>EditVoterProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditVoterProfileQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>UpdateVoterProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateVoterProfileQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>UpdateEOProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateEOProfileQuery</servlet-class>
+ </servlet> 
+<servlet>
+  <servlet-name>ListVoterBallotsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListVoterBallotsQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ListVoterBallotItemsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListVoterBallotItemsQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CreateElectionQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreateElectionQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ListResultsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListResultsQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CreateIssueQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreateIssueQuery</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateIssueQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateIssueQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ViewProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ViewProfileQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditEOProfileQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditEOProfileQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditBallotQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditBallotQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>VoteOnBallot</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.VoteOnBallot</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>CreateCandidateQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreateCandidateQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>CreatePartyQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.CreatePartyQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>UpdatePartyQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdatePartyQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditPartyQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditPartyQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditIssueQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditIssueQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditElectionQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditElectionQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ApproveResultsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ApproveResultsQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>UpdateVoterRecordQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateVoterRecordQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>UpdateCandidateQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.UpdateCandidateQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ChangeEOPasswordQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ChangeEOPasswordQuery</servlet-class>
+ </servlet> 
+<servlet>
+  <servlet-name>ChangeVoterPasswordQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ChangeVoterPasswordQuery</servlet-class>
+ </servlet> 
+<servlet>
+  <servlet-name>ResetPassword</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ResetPassword</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>DeRegisterQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.DeRegisterQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ListElectionsQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListElectionsQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>ListIssuesQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.ListIssuesQuery</servlet-class>
+ </servlet>
+<servlet>
+  <servlet-name>EditCandidateQuery</servlet-name>
+  <servlet-class>edu.uga.cs.evote.presentation.EditCandidateQuery</servlet-class>
+</servlet>
+ <servlet-mapping>
+  <servlet-name>LoginQuery</servlet-name>
+  <url-pattern>/LoginQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>LogoutQuery</servlet-name>
+  <url-pattern>/LogoutQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>ChangeEOPasswordQuery</servlet-name>
+  <url-pattern>/ChangeEOPasswordQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>ChangeVoterPasswordQuery</servlet-name>
+  <url-pattern>/ChangeVoterPasswordQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>AreYouSureQuery</servlet-name>
+  <url-pattern>/AreYouSureQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreateDistrictQuery</servlet-name>
+  <url-pattern>/CreateDistrictQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>EditDistrictQuery</servlet-name>
+  <url-pattern>/EditDistrictQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ListDistrictsQuery</servlet-name>
+  <url-pattern>/ListDistrictsQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>RegisterQuery</servlet-name>
+  <url-pattern>/RegisterQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateDistrictQuery</servlet-name>
+  <url-pattern>/UpdateDistrictQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateIssueQuery</servlet-name>
+  <url-pattern>/UpdateIssueQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ListBallotsQuery</servlet-name>
+  <url-pattern>/ListBallotsQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>ApproveResultsQuery</servlet-name>
+  <url-pattern>/ApproveResultsQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>ListElectionResultQuery</servlet-name>
+  <url-pattern>/ListElectionResultQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreateBallotQuery</servlet-name>
+  <url-pattern>/CreateBallotQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ViewVoterProfileQuery</servlet-name>
+  <url-pattern>/ViewVoterProfileQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>UpdateEOProfileQuery</servlet-name>
+  <url-pattern>/UpdateEOProfileQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateVoterProfileQuery</servlet-name>
+  <url-pattern>/UpdateVoterProfileQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>ListCandidatesQuery</servlet-name>
+  <url-pattern>/ListCandidatesQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreateCandidateQuery</servlet-name>
+  <url-pattern>/CreateCandidateQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreateIssueQuery</servlet-name>
+  <url-pattern>/CreateIssueQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreatePartyQuery</servlet-name>
+  <url-pattern>/CreatePartyQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>UpdatePartyQuery</servlet-name>
+  <url-pattern>/UpdatePartyQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>EditPartyQuery</servlet-name>
+  <url-pattern>/EditPartyQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>ListPartiesQuery</servlet-name>
+  <url-pattern>/ListPartiesQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateBallotQuery</servlet-name>
+  <url-pattern>/UpdateBallotQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>EditBallotQuery</servlet-name>
+  <url-pattern>/EditBallotQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>EditIssueQuery</servlet-name>
+  <url-pattern>/EditIssueQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>EditElectionQuery</servlet-name>
+  <url-pattern>/EditElectionQuery</url-pattern>
+ </servlet-mapping> 
+<servlet-mapping>
+  <servlet-name>EditVoterProfileQuery</servlet-name>
+  <url-pattern>/EditVoterProfileQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ListVoterBallotsQuery</servlet-name>
+  <url-pattern>/ListVoterBallotsQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CreateElectionQuery</servlet-name>
+  <url-pattern>/CreateElectionQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ListResultsQuery</servlet-name>
+  <url-pattern>/ListResultsQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ListVoterBallotItemsQuery</servlet-name>
+  <url-pattern>/ListVoterBallotItemsQuery</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>ViewProfileQuery</servlet-name>
+  <url-pattern>/ViewProfileQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>EditEOProfileQuery</servlet-name>
+  <url-pattern>/EditEOProfileQuery</url-pattern>
+ </servlet-mapping> 
+ <servlet-mapping>
+  <servlet-name>VoteOnBallot</servlet-name>
+  <url-pattern>/VoteOnBallot</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateElectionQuery</servlet-name>
+  <url-pattern>/UpdateElectionQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateCandidateQuery</servlet-name>
+  <url-pattern>/UpdateCandidateQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateVoterRecordQuery</servlet-name>
+  <url-pattern>/UpdateVoterRecordQuery</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ResetPassword</servlet-name>
+  <url-pattern>/ResetPassword</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeRegisterQuery</servlet-name>
+  <url-pattern>/DeRegisterQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>ListElectionsQuery</servlet-name>
+  <url-pattern>/ListElectionsQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>ListIssuesQuery</servlet-name>
+  <url-pattern>/ListIssuesQuery</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>EditCandidateQuery</servlet-name>
+  <url-pattern>/EditCandidateQuery</url-pattern>
+</servlet-mapping>
+</web-app>

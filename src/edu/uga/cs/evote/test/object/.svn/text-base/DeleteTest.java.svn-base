@@ -1,0 +1,350 @@
+package evote.src.edu.uga.cs.evote.test.object;
+
+import java.sql.Connection;
+import java.util.Iterator;
+import java.util.List;
+
+import evote.db.DbUtils;
+import evote.src.edu.uga.cs.evote.EVException;
+import evote.src.edu.uga.cs.evote.entity.Ballot;
+import evote.src.edu.uga.cs.evote.entity.Candidate;
+import evote.src.edu.uga.cs.evote.entity.Election;
+import evote.src.edu.uga.cs.evote.entity.ElectionsOfficer;
+import evote.src.edu.uga.cs.evote.entity.ElectoralDistrict;
+import evote.src.edu.uga.cs.evote.entity.Issue;
+import evote.src.edu.uga.cs.evote.entity.PoliticalParty;
+import evote.src.edu.uga.cs.evote.entity.VoteRecord;
+import evote.src.edu.uga.cs.evote.entity.Voter;
+import evote.src.edu.uga.cs.evote.entity.impl.BallotImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.BallotItemImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.CandidateImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.ElectionImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.ElectionsOfficerImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.ElectoralDistrictImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.IssueImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.PoliticalPartyImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.UserImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.VoteRecordImpl;
+import evote.src.edu.uga.cs.evote.entity.impl.VoterImpl;
+import evote.src.edu.uga.cs.evote.object.ObjectLayer;
+import evote.src.edu.uga.cs.evote.object.impl.ObjectLayerImpl;
+import evote.src.edu.uga.cs.evote.persistence.PersistenceLayer;
+import evote.src.edu.uga.cs.evote.persistence.impl.PersistenceLayerImpl;
+
+public class DeleteTest
+{
+    public static void main(String[] args) throws EVException
+    {
+         Connection  conn = null;
+         ObjectLayer objectLayer = null;
+         PersistenceLayer persistence = null;
+
+         // get a database connection
+         try {
+             conn = DbUtils.connect();
+         } 
+         catch (Exception seq) {
+             System.err.println( "DeleteTest: Unable to obtain a database connection" );
+         }
+         
+         if( conn == null ) {
+             System.out.println( "DeleteTest: failed to connect to the database" );
+             return;
+         }
+         
+         // obtain a reference to the ObjectModel module      
+         objectLayer = new ObjectLayerImpl();
+         // obtain a reference to Persistence module and connect it to the ObjectModel        
+         persistence = new PersistenceLayerImpl( conn, objectLayer ); 
+         // connect the ObjectModel module to the Persistence module
+         objectLayer = new ObjectLayerImpl(persistence);
+         
+ 		BallotImpl.setPersistenceLayer(persistence);
+ 		if(BallotImpl.getPersistenceLayer() == null) System.out.println("no persistence for ballot");
+ 		
+ 		BallotItemImpl.setPersistenceLayer(persistence);
+ 		if(BallotItemImpl.getPersistenceLayer() == null) System.out.println("no persistence for ballotitem");
+ 		
+ 		CandidateImpl.setPersistenceLayer(persistence);
+ 		if(CandidateImpl.getPersistenceLayer() == null) System.out.println("no persistence for candidate");
+ 		
+ 		ElectionImpl.setPersistenceLayer(persistence);
+ 		if(ElectionImpl.getPersistenceLayer() == null) System.out.println("no persistence for election");
+ 		
+ 		ElectionsOfficerImpl.setPersistenceLayer(persistence);
+ 		if(ElectionsOfficerImpl.getPersistenceLayer() == null) System.out.println("no persistence for electionsofficer");
+ 		
+ 		ElectoralDistrictImpl.setPersistenceLayer(persistence);
+ 		if(ElectoralDistrictImpl.getPersistenceLayer() == null) System.out.println("no persistence for electoraldistrict");
+ 		
+ 		IssueImpl.setPersistenceLayer(persistence);
+ 		if(IssueImpl.getPersistenceLayer() == null) System.out.println("no persistence for issue");
+ 		
+ 		PoliticalPartyImpl.setPersistenceLayer(persistence);
+ 		if(PoliticalPartyImpl.getPersistenceLayer() == null) System.out.println("no persistence for party");
+ 		
+ 		UserImpl.setPersistenceLayer(persistence);
+ 		if(UserImpl.getPersistenceLayer() == null) System.out.println("no persistence for user");
+ 		
+ 		VoteRecordImpl.setPersistenceLayer(persistence);
+ 		if(VoteRecordImpl.getPersistenceLayer() == null) System.out.println("no persistence for voterecord");
+ 		
+ 		VoterImpl.setPersistenceLayer(persistence);
+ 		if(VoterImpl.getPersistenceLayer() == null) System.out.println("no persistence for voter");
+ 		
+         Iterator<Voter> voterIter = null;
+         Iterator<Candidate> candidateIter = null;
+         Iterator<ElectionsOfficer> officerIter = null;
+         Iterator<PoliticalParty> partyIter = null;
+         Iterator<Election> electionIter = null;
+         Iterator<Issue> issueIter = null;
+         Iterator<Ballot> ballotIter = null;
+         Iterator<VoteRecord> recordIter = null;
+         Iterator<ElectoralDistrict> districtIter = null;
+
+         try {
+             
+        	 System.out.println("=====================Deleting===================");
+        	//Candidates
+             Candidate currentCandidate = null;
+             List<Candidate> candidates = objectLayer.findCandidate( null );
+             candidateIter = candidates.iterator();
+             while( candidateIter.hasNext() ) {
+                 currentCandidate = candidateIter.next();
+                 
+                 if(currentCandidate != null){
+                	 
+                	 System.out.println("Deleting Candidate " + currentCandidate.getName());
+                	 objectLayer.deleteCandidate(currentCandidate);
+                 } else{
+                	 
+                	 System.out.println("Unable to delete a Candidate object");
+                 }
+             }//Candidates
+             
+             //PoliticalParties
+             PoliticalParty currentParty = null;
+             List<PoliticalParty> parties = objectLayer.findPoliticalParty( null );
+             partyIter = parties.iterator();
+             while( partyIter.hasNext() ) {
+                 currentParty = partyIter.next();
+
+                 if(currentParty != null){
+                	 
+                	 System.out.println("Deleting PoliticalParty " + currentParty.getName());
+                	 Candidate c = objectLayer.createCandidate();
+                     c.setPoliticalParty( currentParty );
+                     
+                     List<Candidate> partyCandidates = objectLayer.findCandidate( c );
+                    
+                     candidateIter = partyCandidates.iterator();
+                     while( candidateIter != null && candidateIter.hasNext() ) {
+                         Candidate partyCandidate = candidateIter.next();
+                         System.out.println( "      " + partyCandidate.getName() );
+                     }
+                     
+                     objectLayer.deletePoliticalParty(currentParty);
+                 } else{
+                	 
+                	 System.out.println("Unable to delete a PoliticalParty object");
+                 }
+             }//PoliticalPartys
+        	
+             // VoteRecords
+             VoteRecord currentRecord = null;
+             List<VoteRecord> records = objectLayer.findVoteRecord( null );
+             recordIter = records.iterator();
+             while( recordIter.hasNext() ) {
+                 currentRecord = recordIter.next();
+                 if(currentRecord != null){
+                	 
+                	 System.out.println("Deleting VoteRecord " + currentRecord.getVoter().getFirstName() + " " + 
+                			 			currentRecord.getVoter().getLastName() + "; " +
+                			 			currentRecord.getBallot().getId());
+                	 objectLayer.deleteVoteRecord(currentRecord);
+                	 
+                 } else{
+                	 
+                	 System.out.println("Unable to delete a VoteRecord object");
+                 }//if
+             }//VoteRecords
+             
+             //Issues
+             Issue currentIssue = null;
+             List<Issue> issues = objectLayer.findIssue( null );
+             issueIter = issues.iterator();
+             while( issueIter.hasNext() ) {
+                 currentIssue = issueIter.next();
+                 
+                 if(currentIssue != null){
+                	 System.out.println("Deleting Issue " + currentIssue.getQuestion());
+                	 objectLayer.deleteIssue(currentIssue);
+                	 
+                 } else{
+                	 
+                	 System.out.println("Unable to delete an Issue object");
+                 }
+             }//Issues
+             
+             //Elections
+             Election currentElection = null;
+             List<Election> elections = objectLayer.findElection( null );
+             electionIter = elections.iterator();
+             while( electionIter.hasNext() ) {
+                 currentElection = electionIter.next();
+                 
+                 if(currentElection != null){
+                	 
+                	 System.out.println("Deleting Election " + currentElection.getOffice());
+                	 //print Candidates in currentElection
+                     Candidate electionCandidate = objectLayer.createCandidate();
+                     electionCandidate.setElection( currentElection );
+                     List<Candidate> electionCandidates = objectLayer.findCandidate( electionCandidate );
+                     candidateIter = electionCandidates.iterator();
+                     while( candidateIter != null && candidateIter.hasNext() ) {
+                         Candidate c = candidateIter.next();
+                         System.out.println( "      " + c.getName() );
+                     }
+                     objectLayer.deleteElection(currentElection);
+                 	
+                 } else{
+                	 
+                	 System.out.println("Unable to delete an Election object");
+                 }
+             }//Elections
+             
+             //Ballots
+             Ballot currentBallot = null;
+             List<Ballot> ballots = objectLayer.findBallot( null );
+             ballotIter = ballots.iterator();
+             while( ballotIter.hasNext() ) {
+                 currentBallot = ballotIter.next();
+                 
+                 if(currentBallot != null){
+                	 
+                	System.out.println("Deleting Ballot " + currentBallot.getId());
+                	 //print ballotItems currentBallot has 
+                     Issue i = objectLayer.createIssue();
+                     i.setBallot( currentBallot );
+                     Election e = objectLayer.createElection();
+                     e.setBallot(currentBallot);
+                     
+                     List<Issue> ballotIssues = objectLayer.findIssue( i );
+                     List<Election> ballotElections = objectLayer.findElection( e );
+                     
+                     System.out.println("       Issues: ");
+                     issueIter = ballotIssues.iterator();
+                     while( issueIter != null && issueIter.hasNext() ) {
+                         Issue ballotIssue = issueIter.next();
+                         System.out.println( "              " + ballotIssue.getQuestion() );
+                     }
+                     
+                     System.out.println("       Elections: ");
+                     electionIter = ballotElections.iterator();
+                     while( electionIter != null && electionIter.hasNext() ) {
+                         Election ballotElection = electionIter.next();
+                         System.out.println( "              " + ballotElection.getOffice() );
+                     }
+                     
+                     objectLayer.deleteBallot(currentBallot);
+                	 
+                 } else{
+                	 
+                	 System.out.println("Unable to delete a Ballot object");
+                 }
+             }//Ballots
+             
+             //Voters
+             Voter currentVoter = null;
+             List<Voter> voters = objectLayer.findVoter( null );
+             voterIter = voters.iterator();
+             while( voterIter.hasNext() ) {
+                 currentVoter = voterIter.next();
+
+                 if(currentVoter != null){
+                	 
+                	 System.out.println("Deleting Voter " + currentVoter);
+                	 //print ballots currentVoter has voted on
+                     VoteRecord modelVoteRecord = objectLayer.createVoteRecord();
+                     modelVoteRecord.setVoter( currentVoter );
+                     List<VoteRecord> voteRecords = objectLayer.findVoteRecord( modelVoteRecord );
+                     recordIter = voteRecords.iterator();
+                     while( recordIter != null && recordIter.hasNext() ) {
+                         VoteRecord v = recordIter.next();
+                         System.out.println( "      " + v.getBallot().getId() );
+                     }
+                     objectLayer.deleteVoter(currentVoter);
+                	 
+                 } else{
+                	 
+                	 System.out.println("Unable to delete a Voter object");
+                 }
+             }//Voters
+             
+             //ElectionsOfficers
+             ElectionsOfficer currentOfficer = null;
+             List<ElectionsOfficer> officers = objectLayer.findElectionsOfficer( null );
+             officerIter = officers.iterator();
+             while( officerIter.hasNext() ) {
+                 currentOfficer = officerIter.next();
+                 if(currentOfficer != null){
+                	 
+                	 objectLayer.deleteElectionsOfficer(currentOfficer);
+                	 System.out.println("Deleting ElectionsOfficer " + 
+                			 			currentOfficer.getFirstName() + " " + currentOfficer.getLastName());
+                 } else{
+                	 
+                	 System.out.println("Unable to delete an ElectionsOfficer object");
+                 }
+             }//ElectionsOfficers
+
+             //ElectoralDistricts
+             ElectoralDistrict currentDistrict = null;
+             List<ElectoralDistrict> districts = objectLayer.findElectoralDistrict( null );
+             districtIter = districts.iterator();
+             while( districtIter.hasNext() ) {
+                 currentDistrict = districtIter.next();
+
+                 if(currentDistrict != null){
+                	 
+                	 
+                	 System.out.println("Deleting ElectoralDistrict " + currentDistrict.getName());
+                	 //print Voters currentDistrict has 
+                     Voter v = objectLayer.createVoter();
+                     v.setElectoralDistrict( currentDistrict );
+                     
+                     List<Voter> districtVoters = objectLayer.findVoter( v );
+                    
+                     voterIter = districtVoters.iterator();
+                     while( voterIter != null && voterIter.hasNext() ) {
+                         Voter districtVoter = voterIter.next();
+                         System.out.println( "      " + districtVoter.getFirstName() + " " + districtVoter.getLastName() );
+                     }
+                     
+                     objectLayer.deleteElectoralDistrict(currentDistrict);
+                 } else{
+                	 
+                	 System.out.println("Unable to delete an ElectoralDistrict object");
+                 }
+             }//ElectoralDistricts  
+             
+             System.out.println("==============Finished Deleting================");
+         } catch( EVException e ){
+             
+        	 System.err.println( "EVException: " + e );
+             e.printStackTrace();
+         } catch( Exception e ){
+             
+        	 System.err.println( "Exception: " + e );
+             e.printStackTrace();
+         } finally{
+             // close the connection
+             try {
+                 conn.close();
+             } catch( Exception e ) {
+                 System.err.println( "Exception: " + e );
+                 e.printStackTrace();
+             }//try
+         }//try 
+    }//Main
+}//DeleteTest

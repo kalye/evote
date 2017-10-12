@@ -1,0 +1,47 @@
+10
+
+dir
+865
+http://uml.cs.uga.edu/svn/team4/evote/WebContent/WEB-INF
+http://uml.cs.uga.edu/svn/team4
+
+
+
+2016-12-04T05:22:17.769906Z
+821
+huynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+88a1aa1d-dc71-40da-9c5c-efc5dba32f08
+
+classes
+dir
+
+lib
+dir
+
+web.xml
+file
+
+
+
+
+
+582d92f5fe481f34e77c68b7d8fae882
+2016-12-04T05:22:17.769906Z
+821
+huynh
+has-props
+

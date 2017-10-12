@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/team4/!svn/ver/661/evote/lib
+END
+freemarker.jar
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/team4/!svn/ver/63/evote/lib/freemarker.jar
+END
+jboss-servlet-api_3.1_spec-1.0.0.Final.jar
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/team4/!svn/ver/63/evote/lib/jboss-servlet-api_3.1_spec-1.0.0.Final.jar
+END
+mail-1.4.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/team4/!svn/ver/661/evote/lib/mail-1.4.7.jar
+END
+mysql-connector-java-5.1.33-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/team4/!svn/ver/63/evote/lib/mysql-connector-java-5.1.33-bin.jar
+END
+commons-lang-2.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/team4/!svn/ver/661/evote/lib/commons-lang-2.6.jar
+END

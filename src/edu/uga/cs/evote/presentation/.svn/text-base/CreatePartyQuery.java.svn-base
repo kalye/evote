@@ -1,0 +1,103 @@
+package evote.src.edu.uga.cs.evote.presentation;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import evote.db.DbUtils;
+import evote.src.edu.uga.cs.evote.entity.PoliticalParty;
+import evote.src.edu.uga.cs.evote.object.ObjectLayer;
+import evote.src.edu.uga.cs.evote.object.impl.ObjectLayerImpl;
+import evote.src.edu.uga.cs.evote.persistence.PersistenceLayer;
+import evote.src.edu.uga.cs.evote.persistence.impl.PersistenceLayerImpl;
+
+public class CreatePartyQuery extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	public void doPost( HttpServletRequest  request, HttpServletResponse response ) throws ServletException, IOException{
+
+		Connection conn = null;
+		PrintWriter toClient = response.getWriter();
+		try{
+	    
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+	    
+			response.setContentType("text/html");
+
+		    
+		    String redirect = "successOfficer.html"; 
+		    
+		    String name = request.getParameterValues("name")[0];
+		    if(name.equals("")){
+		    	redirect = "emptyFieldsOfficer.html";
+        		response.sendRedirect(redirect);    
+			    return;
+		    }
+		    
+	        ObjectLayer objectLayer = null;
+	        PersistenceLayer persistence = null;
+	
+	        // get a database connection
+	        try {
+	            conn = DbUtils.connect();
+	        } 
+	        catch (Exception seq) {
+	            System.err.println( "DeleteTest: Unable to obtain a database connection" );
+	        }
+	        
+	        if( conn == null ) {
+	            System.out.println( "DeleteTest: failed to connect to the database" );
+	            return;
+	        }
+	        
+	        // obtain a reference to the ObjectModel module      
+	        objectLayer = new ObjectLayerImpl();
+	        // obtain a reference to Persistence module and connect it to the ObjectModel        
+	        persistence = new PersistenceLayerImpl( conn, objectLayer ); 
+	        // connect the ObjectModel module to the Persistence module
+	        objectLayer = new ObjectLayerImpl(persistence);
+	        persistence.setObjectLayer(objectLayer);
+
+	        PoliticalParty modelParty = objectLayer.createPoliticalParty();
+	        modelParty.setName(name);
+	        modelParty.setId(0);
+	        
+	        List<PoliticalParty> parties2 = objectLayer.findPoliticalParty(modelParty);
+	        
+	        if(parties2.size() > 0){
+	        	redirect = "objectAlreadyExists.html";
+        		response.sendRedirect(redirect);    
+			    conn.close();
+			    return;
+	        }
+	        
+		    PoliticalParty party = objectLayer.createPoliticalParty();
+	        party.setName(name);
+	        
+			objectLayer.storePoliticalParty(party);
+			response.sendRedirect(redirect);
+			conn.close();
+			return;
+		} catch(Exception e){
+	
+			String redirect = new String("invalidDataOfficer.html");
+        	response.sendRedirect(redirect);   
+			toClient.close();
+		    try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		    return;
+		}//try
+    }//doPost
+}//CreateDistrictQuery

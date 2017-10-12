@@ -1,0 +1,231 @@
+package evote.src.edu.uga.cs.evote.presentation;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
+
+import evote.db.DbUtils;
+import evote.src.edu.uga.cs.evote.entity.Ballot;
+import evote.src.edu.uga.cs.evote.entity.Candidate;
+import evote.src.edu.uga.cs.evote.entity.Election;
+import evote.src.edu.uga.cs.evote.entity.Issue;
+import evote.src.edu.uga.cs.evote.logic.LogicLayer;
+import evote.src.edu.uga.cs.evote.logic.impl.LogicLayerImpl;
+
+public class ListVoterBallotItemsQuery extends HttpServlet  {
+
+    private static final long serialVersionUID = 4746837609081425474L;
+
+    public void doPost( HttpServletRequest  request, HttpServletResponse response ) throws ServletException, IOException{
+
+        Connection  conn = null;
+
+        try{
+            response.setContentType("text/html");
+
+            // get a database connection                                                                                                     
+
+            try {
+                conn = DbUtils.connect();
+            }
+            catch (Exception seq) {
+                System.err.println( "Unable to obtain a database connection" );
+            }
+            if( conn == null ) {
+                System.out.println( "failed to connect to the database" );
+                return;
+            }
+
+            LogicLayer logicLayer = new LogicLayerImpl(conn);
+
+            PrintWriter toClient = response.getWriter();
+
+            response.setContentType("text/html");
+               String result = "<!DOCTYPE html>" +
+                                        "<html lang='en'>" +
+                                        "<head>" +
+                                        "<title>Edit Profile</title>" +
+                                        "<meta charset='utf-8'>" +
+                                        "<meta name='viewport' content='width=device-width, initial-scale=1'>" +
+                                        "<link rel='stylesheet'" +
+                                        " href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>" +
+                                        "<script" +
+                                        " src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>" +
+                                        "<script" +
+                                        " src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>" +
+                                        "</head>" +
+                                        "<body>" +
+                   "<nav class=\"navbar navbar-default\">" +
+                   "<div class=\"container-fluid\">" +
+                        "<div class=\"navbar-header\">" +
+                        "<a class=\"navbar-brand\" href=\"index.html\">eVote - Voter</a>" +
+                   "</div>" +
+
+  				"<ul class=\"nav navbar-nav\">" +
+  				"<li><a href=\"ListVoterBallotsQuery\">View/Vote On Ballots</a></li>" +
+                   "<li><a href=\"ListResultsQuery\">View Closed Ballot Results</a></li>" +
+                                "<li><a href=\"ViewVoterProfileQuery\">Update Profile</a></li>" +
+                                "<li><a href=\"successAnon.html\">Log Out</a>" +
+                          "</ul>" +
+		   "</div>" +
+                   "</nav>" ;
+               result += "<div class='container'>" +
+	                                        "<h2>Ballot Items</h2>" +
+	                                        "<br /> <br />";
+	
+			 List<Ballot> ballots = logicLayer.findAllBallots();
+			 
+			 String view;
+			 String vote;
+			 
+			 Ballot ballot = null;
+			 
+			 	for(Ballot b: ballots){
+			 	
+				 	view = request.getParameter("view" + b.getId());
+				 	vote = request.getParameter("vote" + b.getId());
+				 	
+				 	if(view != null){
+				 		
+				 		ballot = b;
+					    
+					    result += "<div class='container'>" +
+					    				"<h3>View Ballot</h3>" +
+					    					"<p>Electoral District: " + ballot.getElectoralDistrict().getName() + "</p>" +
+					    					"<p>Open Date: " + ballot.getOpenDate() + "</p>" +
+				    						"<p>Close Date: " + ballot.getCloseDate() + "</p>" +
+					    					"<br/>" +
+					    				"<h3>Issues</h3>";
+					    				List<Issue> issues = logicLayer.findIssues(ballot);
+					    				if(issues.size() == 0){
+					    					result += "<p>No Issues</p>";
+					    				} else{
+					    	
+					    					for(int j = 0; j < issues.size(); j++){
+					    						
+					    						Issue issue = issues.get(j);
+					    		
+					    						result += 	"<p>" + issue.getQuestion() + "</p>";
+					    					}//for
+					    				}//if
+					    				
+					    				result += "<h3>Elections</h3>";
+					    				
+					    				List<Election> elections = logicLayer.findElections(ballot);
+					    				if(elections.size() == 0){
+					    					result += "<p>No Elections</p>";
+					    				} else{
+					    	
+					    					for(int j = 0; j < elections.size(); j++){
+					    						Election election = elections.get(j);
+					    		
+					    						result += 	"<p>" + election.getOffice() + " ( ";
+					    						
+					    						List<Candidate> candidates = logicLayer.findCandidates(election);
+					    						for(int k = 0; k < candidates.size(); k++){
+					    							result += candidates.get(k).getName() + ", ";
+					    						}
+					    						
+					    						result += 	")</p>";
+					    					}//for
+					    				}//if 
+					    				
+					    				result += "</div>" +
+					    					"</body>" +
+					    				"</html>";
+					   
+						toClient.println(result);
+						conn.close();
+						toClient.close();		
+				 	} else if(vote != null){
+				 		
+				 		ballot = b;
+				 		
+				 		for (Cookie c : request.getCookies()) {
+			    		    
+							if(!(c.getName().equals("voterUser") || c.getName().equals("electionOfficerUser"))){
+								c.setValue("");
+								c.setMaxAge(0);
+								c.setPath("/");
+							}//if
+			    		    response.addCookie(c);
+			    		}
+			    		
+			    		Cookie cookie = new Cookie("ballot", "" + ballot.getId());
+			    		cookie.setMaxAge(60*60);
+					    response.addCookie(cookie);
+					    
+				 		result += "<form method=post action='UpdateVoterRecordQuery'>" + 
+				 					"<h4> District:  " + ballot.getElectoralDistrict().getName() + "</h4>"
+				 					+ "<h4> Zip Code:  " + ballot.getElectoralDistrict().getZipCode() + "</h4>" +
+				 					"<br/>";
+						
+				 		result += "<h3>Issues</h3>";
+						
+				 		List<Issue> issues = logicLayer.findIssues(ballot);
+						if(issues.size() == 0){
+							result += "<p>No Issues</p>";
+						} else{
+				
+							for(int j = 0; j < issues.size(); j++){
+								
+								Issue issue = issues.get(j);
+				
+								result += 	"<p>" + issue.getQuestion() + "</p>" + 
+										"<input type='radio' name = '" + issue.getId() + "' value = 'yes'>Yes<br>" +
+										"<input type='radio' name = '" + issue.getId() + "' value = 'no'>No<br>";
+							}//for
+						}//if
+						
+						result += "<h3>Elections</h3>";
+						
+						List<Election> elections = logicLayer.findElections(ballot);
+						if(elections.size() == 0){
+							
+							result += "<p>No Elections</p>";
+						} else{
+				
+							for(int j = 0; j < elections.size(); j++){
+								Election election = elections.get(j);
+				
+								result += 	"<p>" + election.getOffice() + "</p>";
+								
+								List<Candidate> candidates = logicLayer.findCandidates(election);
+								for(Candidate candidate: candidates){
+									result += "<input type='radio' name = '" + election.getId() + "'value= '" + candidate.getId() + "'>" + candidate.getName();
+									if(election.getIsPartisan()) result += " ( " + candidate.getPoliticalParty() + " )";
+									result += "<br>";
+								}
+								}//for
+							}//if 
+				 		
+				 		
+							result += "<p>Select 'CAST YOUR VOTE' below to cast your vote for this ballot. All votes are final.</p>";
+							result += "<button type='submit'><strong>CAST YOUR VOTE</strong></button>" +
+									"</form></div></body></html>";
+				 		
+							toClient.println(result);
+				 		}//if
+			 		}//for
+			 	
+			 		
+        } catch(Exception e){
+
+            try{
+                conn.close();
+            } catch(Exception f){
+
+            }
+            System.out.println(e.getMessage());
+        }//try                             
+    }//doPost      
+}//
+
+

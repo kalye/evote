@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html">eVote</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="login.html">Sign In</a></li>
+					<li><a href="register.html">Register</a>
+				</ul>
+			</div>
+		</nav>
+	
+	<div class="container">
+		<h2>Invalid Login</h2>
+			<p>The email you provided is not found.</p>
+			</br></br></br>
+			<label for="forgot">Forgotten Password?</label>
+				<a type="button" class="btn btn-default"
+					href="reset.html">Click to
+					Reset</a>
+			<div>
+				<label for="register">Not Registered Yet?</label>
+				<a type="button" class="btn btn-default"
+					href="register.html">Register
+					to Vote!</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+
